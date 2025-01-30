@@ -21,7 +21,7 @@ const LoginButton = ({ children, asChild, mode = 'redirect' }: LoginButtonProps)
     }
 
     return (
-        <span className="cursor-pointer" onClick={onCLick}>
+        <span className="cursor-pointer w-full" onClick={onCLick}>
             {children}
         </span>
     )

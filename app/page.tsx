@@ -1,4 +1,5 @@
 import LoginButton from "@/components/auth/login-button"
+import ContextButton from "@/components/context-button"
 import Logo from "@/components/logo"
 import Image from "next/image"
 
@@ -16,11 +17,11 @@ const Home = async () => {
           </p>
         </div>
 
-        <LoginButton>
-          <div className='text-[1.6rem] dark-bg w-[34.4rem] p-[1rem] rounded-[1.2rem] light-text text-center'>
-            Get started
-          </div>
-        </LoginButton>
+       <div className="px-[3.5rem] w-full">
+          <LoginButton>
+            <ContextButton mode="dark" title="Get started"/>
+          </LoginButton>
+       </div>
 
       </div >
     </div >
