@@ -8,7 +8,7 @@ const Home = async () => {
   return (
     <div className="light-bg flex flex-col items-center justify-between min-h-screen py-[3.5rem]">
       <Logo />
-      
+
       <div className="flex flex-col justify-between items-center gap-[9rem]">
         <div className="flex flex-col items-center">
           <Image src='/landing-photo.svg' width={409} height={400} alt='landing photo' />
@@ -17,11 +17,11 @@ const Home = async () => {
           </p>
         </div>
 
-       <div className="px-[3.5rem] w-full">
+        <div className="px-[3.5rem] w-full">
           <LoginButton>
-            <ContextButton mode="dark" title="Get started"/>
+            <ContextButton mode="dark" title="Get started" />
           </LoginButton>
-       </div>
+        </div>
 
       </div >
     </div >

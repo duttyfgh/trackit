@@ -10,9 +10,12 @@ interface CardWrapperProps {
     label: string
     title: string
     backButtonHref: string
-    nextButtonHref: string
     nextButtonLabel: string
-    type: 'login' | 'signup'
+    currentPage?: number,
+    totalPages?: number
+    isBubbles?: boolean,
+    onHandler?: () => void,
+    isButton?: boolean
 }
 
 const CardWrapper = ({
@@ -20,28 +23,41 @@ const CardWrapper = ({
     label,
     title,
     backButtonHref,
-    nextButtonHref,
-    nextButtonLabel
+    nextButtonLabel,
+    currentPage,
+    totalPages,
+    isBubbles = true,
+    isButton = true,
+    onHandler
 }: CardWrapperProps) => {
     return (
         <div className="mt-auto">
 
-            <Link href='/' className="flex gap-[0.8rem] items-center ml-[3.5rem] mb-[2.3rem]">
+            <Link href={backButtonHref} className="flex gap-[0.8rem] items-center ml-[3.5rem] mb-[2.3rem]">
                 <Image src='/back.svg' width={23} height={23} alt='<-' />
                 <span className="font-[410] text-[1.8rem]">back</span>
             </Link>
 
-            <div className=" h-full flex flex-col dark-bg rounded-t-[2rem] mdin-h-[68.6rem] items-stretch">
+            <div className=" h-full flex flex-col dark-bg rounded-t-[2rem] items-stretch">
                 <div className="flex flex-col pt-[3.5rem] px-[3.5rem]">
                     <Header label={label} title={title} />
 
-                    <div className="py-[7rem]">
+                    <div className="py-[6rem]">
                         {children}
                     </div>
 
                 </div>
 
-                <NextButton nextButtonLabel={nextButtonLabel} currentPage={1} totalPages={3} nextButtonHref="/sign-in/credentials"/>
+
+                {isButton && <NextButton
+                    nextButtonLabel={nextButtonLabel}
+                    currentPage={currentPage!}
+                    totalPages={totalPages!}
+                    isBubbles={isBubbles}
+                    onHandler={onHandler!}
+                />}
+
+
             </div>
         </div>
     )
