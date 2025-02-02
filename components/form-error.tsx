@@ -1,7 +1,7 @@
 import Image from "next/image"
 
 interface FormErrorProps {
-    message: string
+    message: string | undefined
 
 }
 

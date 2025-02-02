@@ -8,8 +8,7 @@ import { useTransition, useState } from 'react'
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
-import { LoginSchema } from "@/schemas"
-import { login } from "@/actions/login"
+import { SignUpSchema } from "@/schemas"
 
 import {
     Form,
@@ -25,25 +24,33 @@ import FormSuccess from "@/components/form-success"
 
 import CardWrapper from "./card-wripper"
 import TextInput from "./text-input"
+import { signUp } from "@/actions/sign-up"
 
-const LoginForm = () => {
+
+interface SignUpNameFormProps {
+    name: string
+}
+
+const SignUpForm = ({ name }: SignUpNameFormProps) => {
     const [errorMessage, setErrorMessage] = useState<string | undefined>('')
     const [successMessage, setSuccessMessage] = useState<string | undefined>('')
     const [isPending, startTransition] = useTransition()
 
-    const form = useForm<z.infer<typeof LoginSchema>>({
-        resolver: zodResolver(LoginSchema),
+    const form = useForm<z.infer<typeof SignUpSchema>>({
+        resolver: zodResolver(SignUpSchema),
         defaultValues: {
+            name: name.toString(),
             email: "",
             password: ""
 
         }
     })
 
-    const handleSubmit = (values: z.infer<typeof LoginSchema>) => {
+    const handleSubmit = (values: z.infer<typeof SignUpSchema>) => {
+        console.log(values)
 
         startTransition(() => {
-            login(values).then((data) => {
+            signUp(values).then((data) => {
                 if (data?.error) {
                     form.reset()
                     setErrorMessage(data.error)
@@ -60,19 +67,16 @@ const LoginForm = () => {
         })
     }
 
-
     return (
         <CardWrapper
-            label="Welcome back!"
-            backButtonHref="/"
-            title='Enter your email and password to log in.'
-            nextButtonLabel="log in"
+            label="Create an account"
+            backButtonHref="/auth/sign-up-photo"
+            title='Enter your email and password to sign up.'
             isBubbles={false}
             isButton={false}
         >
 
             <div className="flex flex-col gap-[4rem]">
-
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col gap-[2rem]">
                         <FormField
@@ -84,7 +88,7 @@ const LoginForm = () => {
                                         <TextInput
                                             type='text'
                                             label="Email"
-                                            error={form.formState.errors.email?.message}
+                                            error={form.formState.errors.name?.message}
                                             disabled={isPending}
                                             {...field}
                                         />
@@ -99,17 +103,12 @@ const LoginForm = () => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <div className="flex flex-col gap-2 items-end">
-                                            <TextInput
-                                                type='password'
-                                                label="Password"
-                                                error={form.formState.errors.password?.message}
-                                                disabled={isPending}
-                                                {...field} />
-                                            <Link href='/auth/forgot-password' className="text-[1.4rem] text-[#FFF2C7]/70 underline px-2">
-                                                Forgot password?
-                                            </Link>
-                                        </div>
+                                        <TextInput
+                                            type='password'
+                                            label="Password"
+                                            error={form.formState.errors.password?.message}
+                                            disabled={isPending}
+                                            {...field} />
                                     </FormControl>
                                 </FormItem>
                             )}
@@ -120,7 +119,7 @@ const LoginForm = () => {
 
                         <ContextButton
                             type="submit"
-                            title={isPending ? '' : "Log in"}
+                            title={isPending ? '' : "Continue"}
                             img={isPending ? '/loader.svg' : ''}
                             imageWidth={24}
                             imageHeight={24}
@@ -144,9 +143,9 @@ const LoginForm = () => {
                     />
 
                     <div className="flex items-center gap-3 text-[1.6rem] text-[#FFF2C7]/80 ">
-                        <p className="font-light">Don&#39;t have an account?</p>
-                        <Link href='/auth/sign-up' className="font-semibold underline">
-                            Sign up
+                        <p className="font-light">Already have an account?</p>
+                        <Link href='/auth/login' className="font-semibold underline">
+                            Login in
                         </Link>
                     </div>
                 </div>
@@ -157,4 +156,4 @@ const LoginForm = () => {
     )
 }
 
-export default LoginForm
+export default SignUpForm

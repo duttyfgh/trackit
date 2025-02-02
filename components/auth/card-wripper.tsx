@@ -10,7 +10,7 @@ interface CardWrapperProps {
     label: string
     title: string
     backButtonHref: string
-    nextButtonLabel: string
+    nextButtonLabel?: string
     currentPage?: number,
     totalPages?: number
     isBubbles?: boolean,
@@ -50,7 +50,7 @@ const CardWrapper = ({
 
 
                 {isButton && <NextButton
-                    nextButtonLabel={nextButtonLabel}
+                    nextButtonLabel={nextButtonLabel || "Next"}
                     currentPage={currentPage!}
                     totalPages={totalPages!}
                     isBubbles={isBubbles}

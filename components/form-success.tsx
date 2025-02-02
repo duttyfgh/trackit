@@ -1,7 +1,7 @@
 import Image from "next/image"
 
 interface FormSuccessProps {
-    message: string
+    message: string | undefined
 
 }
 

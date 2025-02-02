@@ -7,10 +7,11 @@ interface TextInputProps {
     label: string
     type: string
     error: string | undefined
+    disabled?: boolean
 
 }
 
-const TextInput = ({ label, type, error, ...rest }: TextInputProps) => {
+const TextInput = ({ label, type, error, disabled, ...rest }: TextInputProps) => {
     const [isFocused, setIsFocused] = useState(false)
     const [inputType, setInputType] = useState(type)
 
@@ -25,11 +26,15 @@ const TextInput = ({ label, type, error, ...rest }: TextInputProps) => {
     }
 
     const onOpenEye = () => {
-        setInputType('text')
+        if (!disabled) {
+            setInputType('text')
+        }
     }
 
     const onCloseEye = () => {
-        setInputType('password')
+        if (!disabled) {
+            setInputType('password')
+        }
     }
 
     return (
@@ -40,6 +45,7 @@ const TextInput = ({ label, type, error, ...rest }: TextInputProps) => {
                 {...rest}
                 onBlur={focusOut}
                 className={`px-[2.1rem] py-[2.7rem] text-[1.6rem] border rounded-[1.2rem] border-[#FFF2C7]/15 bg-transparent text-[#FFF2C7]/80 z-10 outline-none transition-all ${error && 'border-[#dc3939]'} `}
+                disabled={disabled}
             />
             <span className={`px-1 text-[#FFF2C7]/50 text-[1.6rem] absolute ${isFocused ? '-top-5 z-20 dark-bg' : 'top-[1.6rem]'} left-[1.9rem] transition-all ${error && 'text-[#dc3939]'}`}>
                 {error ? error : label}
@@ -49,11 +55,12 @@ const TextInput = ({ label, type, error, ...rest }: TextInputProps) => {
                 type === "password" && inputType === "text" && (
                     <Image
                         onClick={onCloseEye}
-                        className={`absolute right-[1.9rem] top-[1.8rem] cursor-pointer z-20 ${error && 'red-filter'} transition-all`}
+                        className={`absolute right-[1.9rem] top-[1.8rem] cursor-pointer z-20 ${error && 'red-filter'} ${disabled && 'opacity-50'} transition-all `}
                         src="/closed-eye.svg"
-                        alt="close-eye"
+                        alt="..."
                         width={22}
-                        height={18} />
+                        height={18}
+                    />
                 )
             }
 
@@ -63,7 +70,7 @@ const TextInput = ({ label, type, error, ...rest }: TextInputProps) => {
                         onClick={onOpenEye}
                         className={`absolute right-[1.9rem] top-[1.9rem] cursor-pointer z-20 ${error && 'red-filter'} transition-all`}
                         src="/open-eye.svg"
-                        alt="open-eye"
+                        alt="..."
                         width={22}
                         height={15}
                     />
