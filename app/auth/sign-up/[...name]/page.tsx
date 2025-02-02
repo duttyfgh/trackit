@@ -1,13 +1,8 @@
+import { PageProps } from "@/.next/types/app/layout"
 import SignUpForm from "@/components/auth/sign-up-form"
 
-interface SignUpPageProps {
-    params: {
-        name: string
-    }
-}
-
-const SignUpPage = async ({ params }: SignUpPageProps) => {
-    const { name } = params
+const SignUpPage = async ({ params }: PageProps) => {
+    const { name } = await params
 
     return (
         <SignUpForm name={name} />
