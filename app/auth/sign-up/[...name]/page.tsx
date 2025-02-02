@@ -7,7 +7,7 @@ interface SignUpPageProps {
 }
 
 const SignUpPage = async ({ params }: SignUpPageProps) => {
-    const { name } = await params
+    const { name } = params
 
     return (
         <SignUpForm name={name} />
