@@ -5,6 +5,7 @@ import Link from "next/link"
 import * as z from "zod"
 
 import { useTransition, useState } from 'react'
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
@@ -32,6 +33,12 @@ interface SignUpNameFormProps {
 }
 
 const SignUpForm = ({ name }: SignUpNameFormProps) => {
+    const router = useRouter()
+
+    if (!name) {
+        router.push('/auth/sign-up')
+    }
+
     const [errorMessage, setErrorMessage] = useState<string | undefined>('')
     const [successMessage, setSuccessMessage] = useState<string | undefined>('')
     const [isPending, startTransition] = useTransition()
@@ -70,7 +77,7 @@ const SignUpForm = ({ name }: SignUpNameFormProps) => {
     return (
         <CardWrapper
             label="Create an account"
-            backButtonHref="/auth/sign-up-photo"
+            backButtonHref="/auth/sign-up"
             title='Enter your email and password to sign up.'
             isBubbles={false}
             isButton={false}

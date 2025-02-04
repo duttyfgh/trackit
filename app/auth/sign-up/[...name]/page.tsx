@@ -10,5 +10,3 @@ const SignUpPage = async ({ params }: PageProps) => {
 }
 
 export default SignUpPage
-
-//test line
