@@ -4,8 +4,10 @@ import * as z from 'zod'
 import bcryptjs from 'bcryptjs'
 
 import { db } from "@/lib/db"
+import { generateVerificationToken } from "@/lib/tokens"
 import { SignUpSchema } from '@/schemas/index'
 import { getUserByEmail } from '@/data/user'
+import { sendVerificationEmail } from '@/lib/mail'
 
 export const signUp = async (values: z.infer<typeof SignUpSchema>) => {
     const validatedFields = SignUpSchema.safeParse(values)
@@ -32,8 +34,11 @@ export const signUp = async (values: z.infer<typeof SignUpSchema>) => {
         }
     })
 
-    //TODO: send verification token email
-    //TODO: suggest user to set a profile photo immediately after creating account photo
+    const verificationToken = await generateVerificationToken(email)
 
-    return { success: "Account has been created!" }
+    await sendVerificationEmail(verificationToken.email, verificationToken.token)
+    
+    //TODO: suggest user to set a profile photo immediately after creating account 
+
+    return { success: "Token sent! Check your email" }
 }

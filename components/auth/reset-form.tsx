@@ -7,10 +7,9 @@ import * as z from "zod"
 import { useTransition, useState } from 'react'
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useSearchParams } from "next/navigation"
 
-import { LoginSchema } from "@/schemas"
-import { login } from "@/actions/login"
+import { ResetSchema } from "@/schemas"
+import { reset } from "@/actions/reset"
 
 import {
     Form,
@@ -26,37 +25,30 @@ import FormSuccess from "@/components/form-success"
 
 import CardWrapper from "./card-wripper"
 import TextInput from "./text-input"
-import GoogleAuthorizationButton from "./google-authorization-button"
 
-const LoginForm = () => {
-    const searchParams = useSearchParams()
-    const urlError = searchParams.get('error') === 'OAuthAccountNotLinked' ? 'The email is already used with another provider!' : ''
-
+const ResetForm = () => {
     const [errorMessage, setErrorMessage] = useState<string | undefined>('')
     const [successMessage, setSuccessMessage] = useState<string | undefined>('')
     const [isPending, startTransition] = useTransition()
 
-    const form = useForm<z.infer<typeof LoginSchema>>({
-        resolver: zodResolver(LoginSchema),
+    const form = useForm<z.infer<typeof ResetSchema>>({
+        resolver: zodResolver(ResetSchema),
         defaultValues: {
             email: "",
-            password: ""
 
         }
     })
 
-    const handleSubmit = (values: z.infer<typeof LoginSchema>) => {
+    const handleSubmit = (values: z.infer<typeof ResetSchema>) => {
         setErrorMessage('')
         setSuccessMessage('')
 
         startTransition(() => {
-            login(values).then((data) => {
+            reset(values).then((data) => {
                 if (data?.error) {
-                    form.reset()
                     setErrorMessage(data.error)
                 }
                 if (data?.success) {
-                    form.reset()
                     setSuccessMessage(data?.success)
                 }
             })
@@ -66,18 +58,17 @@ const LoginForm = () => {
         })
     }
 
-
     return (
         <CardWrapper
-            label="Welcome back!"
-            backButtonHref="/"
-            title='Enter your email and password to log in.'
-            nextButtonLabel="log in"
+            label="Forgot the password?"
+            backButtonHref="/auth/sign-in"
+            title='Enter your email to reset your password.'
+            nextButtonLabel="Back to login"
             isBubbles={false}
-            isButton={false}
+            isButton={false} 
         >
 
-            <div className="flex flex-col gap-[4rem]">
+            <div className="flex flex-col justify-around gap-[4rem] h-[400px] pt-[40px]">
 
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col gap-[2rem]">
@@ -99,34 +90,12 @@ const LoginForm = () => {
                             )}
                         />
 
-                        <FormField
-                            control={form.control}
-                            name="password"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormControl>
-                                        <div className="flex flex-col gap-3 items-end">
-                                            <TextInput
-                                                type='password'
-                                                label="Password"
-                                                error={form.formState.errors.password?.message}
-                                                disabled={isPending}
-                                                {...field} />
-                                            <Link href='/auth/reset' className="text-[1.4rem] text-[#FFF2C7]/70 underline px-2">
-                                                Forgot password?
-                                            </Link>
-                                        </div>
-                                    </FormControl>
-                                </FormItem>
-                            )}
-                        />
-
-                        <FormError message={errorMessage || urlError} />
+                        <FormError message={errorMessage} />
                         <FormSuccess message={successMessage} />
 
                         <ContextButton
                             type="submit"
-                            title={isPending ? '' : "Log in"}
+                            title={isPending ? '' : "Send reset email"}
                             img={isPending ? '/loader.svg' : ''}
                             imageWidth={24}
                             imageHeight={24}
@@ -137,23 +106,25 @@ const LoginForm = () => {
                     </form>
                 </Form>
 
-                <Separator title="or" />
-
-                <div className="flex flex-col gap-5 w-full items-center">
-                    <GoogleAuthorizationButton />
-
-                    <div className="flex items-center gap-3 text-[1.6rem] light-text">
-                        <p className="font-light">Don&#39;t have an account?</p>
-                        <Link href='/auth/sign-up' className="font-semibold underline text-[#FFF2C7]/80">
-                            Sign up
-                        </Link>
+                <div className="flex flex-col gap-[2rem]">
+                    <Separator title="or" />
+    
+                    <div className="flex flex-col gap-5 w-full items-center">
+    
+                        <div className="flex items-center gap-3 text-[1.6rem] light-text">
+                            <p className="font-light">Don&#39;t have an account?</p>
+                            <Link href='/auth/sign-up' className="font-semibold underline text-[#FFF2C7]/80">
+                                Sign up
+                            </Link>
+                        </div>
                     </div>
+    
                 </div>
-
             </div>
 
         </CardWrapper>
     )
 }
 
-export default LoginForm
+
+export default ResetForm

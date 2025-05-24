@@ -16,7 +16,7 @@ interface ContextButtonProps {
 const ContextButton = ({ title, img, imageWidth, imageHeight, mode, onClick, type, disabled }: ContextButtonProps) => {
     return (
         <button
-            className={`${mode === 'light' ? 'light-bg dark-text font-medium' : 'border-[#FFF2C7]/15 border dark-bg light-text'} rounded-[1.2rem] flex items-center justify-center px-8 py-6 shadow-md  gap-4 w-full outline-none`}
+            className={`${mode === 'light' ? 'light-bg dark-text font-medium' : 'border-[#FFF2C7]/15 border dark-button-bg light-primary-text'} rounded-[1.2rem] flex items-center justify-center px-8 py-6 shadow-md  gap-4 w-full outline-none`}
             onClick={onClick}
             type={type}
             disabled={disabled}
@@ -30,7 +30,7 @@ const ContextButton = ({ title, img, imageWidth, imageHeight, mode, onClick, typ
                     className={(img === '/loader.svg') && 'animate-spin' || ''}
                 />
             )}
-            <span className="text-[1.6rem]">{title}</span>
+            <span className={`text-[1.6rem] ${img && 'text-[#FFF2C7]/80'}`}>{title}</span>
         </button>
     )
 }

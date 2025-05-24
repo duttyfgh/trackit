@@ -19,7 +19,11 @@ html {
   margin: 0;
 }
 
+* {
+  font-size: 1.4rem;
+}
 
+/* light */
 .light-bg {
   background: #FFF2C7;
 }
@@ -29,11 +33,19 @@ html {
 }
 
 .light-text {
+  color: #fff2c7b3;
+}
+
+.light-primary-text {
   color: #FFF2C7;
 }
 
+/* dark */
 .dark-text {
   color: #3C2A21
+}
+.dark-button-bg {
+  background: #443026;
 }
 
 .dark-border {

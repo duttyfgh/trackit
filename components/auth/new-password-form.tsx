@@ -5,11 +5,12 @@ import Link from "next/link"
 import * as z from "zod"
 
 import { useTransition, useState } from 'react'
-import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
+import { useSearchParams } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 
-import { SignUpSchema } from "@/schemas"
+import { NewPasswordSchema } from "@/schemas"
+import { newPassword } from "@/actions/new-password"
 
 import {
     Form,
@@ -25,48 +26,34 @@ import FormSuccess from "@/components/form-success"
 
 import CardWrapper from "./card-wripper"
 import TextInput from "./text-input"
-import { signUp } from "@/actions/sign-up"
-import GoogleAuthorizationButton from "./google-authorization-button"
 
-
-interface SignUpNameFormProps {
-    name: string
-}
-
-const SignUpForm = ({ name }: SignUpNameFormProps) => {
-    const router = useRouter()
-
-    if (!name) {
-        router.push('/auth/sign-up')
-    }
+const NewPasswordForm = () => {
+    const searchParams = useSearchParams()
+    const token = searchParams.get('token')
 
     const [errorMessage, setErrorMessage] = useState<string | undefined>('')
     const [successMessage, setSuccessMessage] = useState<string | undefined>('')
     const [isPending, startTransition] = useTransition()
 
-    const form = useForm<z.infer<typeof SignUpSchema>>({
-        resolver: zodResolver(SignUpSchema),
+    const form = useForm<z.infer<typeof NewPasswordSchema>>({
+        resolver: zodResolver(NewPasswordSchema),
         defaultValues: {
-            name: name.toString(),
-            email: "",
-            password: ""
+            password: "",
 
         }
     })
 
-    const handleSubmit = (values: z.infer<typeof SignUpSchema>) => {
-        console.log(values)
+    const handleSubmit = (values: z.infer<typeof NewPasswordSchema>) => {
+        setErrorMessage('')
+        setSuccessMessage('')
 
         startTransition(() => {
-            signUp(values).then((data) => {
+            newPassword(values, token).then((data) => {
                 if (data?.error) {
-                    form.reset()
                     setErrorMessage(data.error)
                 }
-
                 if (data?.success) {
-                    form.reset()
-                    setSuccessMessage(data.success)
+                    setSuccessMessage(data?.success)
                 }
             })
                 .catch(() => {
@@ -77,34 +64,18 @@ const SignUpForm = ({ name }: SignUpNameFormProps) => {
 
     return (
         <CardWrapper
-            label="Create an account"
+            label="Enter a new password"
             backButtonHref="/auth/sign-up"
-            title='Enter your email and password to sign up.'
+            title='Come up with a new password.'
+            nextButtonLabel="Back to login"
             isBubbles={false}
             isButton={false}
         >
 
-            <div className="flex flex-col gap-[4rem]">
+            <div className="flex flex-col justify-around gap-[4rem] h-[400px] pt-[40px]">
+
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col gap-[2rem]">
-                        <FormField
-                            control={form.control}
-                            name="email"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormControl>
-                                        <TextInput
-                                            type='text'
-                                            label="Email"
-                                            error={form.formState.errors.name?.message}
-                                            disabled={isPending}
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                </FormItem>
-                            )}
-                        />
-
                         <FormField
                             control={form.control}
                             name="password"
@@ -127,7 +98,7 @@ const SignUpForm = ({ name }: SignUpNameFormProps) => {
 
                         <ContextButton
                             type="submit"
-                            title={isPending ? '' : "Continue"}
+                            title={isPending ? '' : "Reset password"}
                             img={isPending ? '/loader.svg' : ''}
                             imageWidth={24}
                             imageHeight={24}
@@ -138,23 +109,25 @@ const SignUpForm = ({ name }: SignUpNameFormProps) => {
                     </form>
                 </Form>
 
-                <Separator title="or" />
+                <div className="flex flex-col gap-[2rem]">
+                    <Separator title="or" />
 
-                <div className="flex flex-col gap-5 w-full items-center">
-                    <GoogleAuthorizationButton />
+                    <div className="flex flex-col gap-5 w-full items-center">
 
-                    <div className="flex items-center gap-3 text-[1.6rem] light-text">
-                        <p className="font-light">Already have an account?</p>
-                        <Link href='/auth/login' className="font-semibold underline text-[#FFF2C7]/80">
-                            Login in
-                        </Link>
+                        <div className="flex items-center gap-3 text-[1.6rem] light-text">
+                            <p className="font-light">Don&#39;t have an account?</p>
+                            <Link href='/auth/sign-up' className="font-semibold underline text-[#FFF2C7]/80">
+                                Sign up
+                            </Link>
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
 
         </CardWrapper>
     )
 }
 
-export default SignUpForm
+
+export default NewPasswordForm

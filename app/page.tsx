@@ -3,8 +3,7 @@ import ContextButton from "@/components/context-button"
 import Logo from "@/components/logo"
 import Image from "next/image"
 
-const Home = async () => {
-
+const App = () => {
   return (
     <div className="light-bg flex flex-col items-center justify-between min-h-screen py-[3.5rem]">
       <Logo />
@@ -28,4 +27,4 @@ const Home = async () => {
   )
 }
 
-export default Home
+export default App

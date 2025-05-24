@@ -6,9 +6,9 @@ interface HeaderProps {
 
 const Header = ({ label, title }: HeaderProps) => {
     return (
-        <div className="light-text flex flex-col items-center">
-            <h1 className="text-[3.4rem]">{label}</h1>
-            <p className="font-thin text-[#FFF2C7]/80">{title}</p>
+        <div className="flex flex-col items-center">
+            <h1 className="text-[3.4rem] light-primary-text">{label}</h1>
+            <p className="font-thin light-text">{title}</p>
         </div>
     )
 }
