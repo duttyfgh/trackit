@@ -35,5 +35,5 @@ export const newVerification = async (token: string) => {
         where: { id: existingToken.id }
     })
 
-    return { success: "Email verified! Try to login again!" }
+    return { success: "Email verified! Try to login now!" }
 }
