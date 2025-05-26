@@ -34,7 +34,7 @@ const LoginForm = () => {
     const searchParams = useSearchParams()
     const urlError = searchParams.get('error') === 'OAuthAccountNotLinked' ? 'The email is already used with another provider!' : ''
 
-    const [showTwoFactor, setShowTwoFactor] = useState<boolean>(true)
+    const [showTwoFactor, setShowTwoFactor] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string | undefined>('')
     const [successMessage, setSuccessMessage] = useState<string | undefined>('')
     const [isPending, startTransition] = useTransition()
