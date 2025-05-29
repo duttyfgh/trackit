@@ -4,7 +4,7 @@ import Link from "next/link"
 
 import * as z from "zod"
 
-import { useTransition, useState } from 'react'
+import { useTransition, useState, useEffect, useRef } from 'react'
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useSearchParams } from "next/navigation"
@@ -18,6 +18,7 @@ import {
     FormField,
     FormItem,
 } from "@/components/ui/form"
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
 
 import ContextButton from "@/components/context-button"
 import Separator from "@/components/separator"
@@ -28,15 +29,21 @@ import CardWrapper from "./card-wripper"
 import TextInput from "./text-input"
 import GoogleAuthorizationButton from "./google-authorization-button"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp"
-import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
+
+const COUNTDOWN_SECONDS = 5 * 60
 
 const LoginForm = () => {
     const searchParams = useSearchParams()
     const urlError = searchParams.get('error') === 'OAuthAccountNotLinked' ? 'The email is already used with another provider!' : ''
 
+    const timerRef = useRef<number | null>(null)
+
     const [showTwoFactor, setShowTwoFactor] = useState<boolean>(false)
+    const [secondsLeft, setSecondsLeft] = useState(0)
+
     const [errorMessage, setErrorMessage] = useState<string | undefined>('')
     const [successMessage, setSuccessMessage] = useState<string | undefined>('')
+
     const [isPending, startTransition] = useTransition()
 
     const form = useForm<z.infer<typeof LoginSchema>>({
@@ -48,15 +55,53 @@ const LoginForm = () => {
         }
     })
 
+    const restartTimer = () => {
+        if (timerRef.current !== null) {
+            clearInterval(timerRef.current)
+        }
+        setSecondsLeft(COUNTDOWN_SECONDS)
+
+        timerRef.current = window.setInterval(() => {
+            setSecondsLeft((s) => {
+                if (s <= 1) {
+                    if (timerRef.current !== null) clearInterval(timerRef.current)
+                    return 0
+                }
+                return s - 1
+            })
+        }, 1000)
+    }
+
+    useEffect(() => {
+        if (showTwoFactor) {
+            restartTimer()
+        }
+        return () => {
+            if (timerRef.current !== null) clearInterval(timerRef.current)
+        }
+    }, [showTwoFactor])
+
     const handleSubmit = (values: z.infer<typeof LoginSchema>) => {
         setErrorMessage('')
         setSuccessMessage('')
 
+        if(showTwoFactor && !values.code) {
+            setErrorMessage('Code is required!')
+            return
+        }
+
         startTransition(() => {
             login(values).then((data) => {
                 if (data?.error) {
-                    form.reset()
                     setErrorMessage(data.error)
+
+                    if (showTwoFactor) {
+                        
+                        form.resetField('code')
+                    } else {
+                        
+                        form.reset()
+                    }
                 }
                 if (data?.success) {
                     form.reset()
@@ -72,6 +117,28 @@ const LoginForm = () => {
                 })
         })
     }
+
+    const handleResend = async () => {
+        setErrorMessage(undefined)
+
+        try {
+            const { email, password } = form.getValues()
+            const data = await login({ email, password })
+
+            if (data?.twoFactorToken) {
+                form.resetField('code')
+                restartTimer()         
+            } else if (data?.error) {
+                setErrorMessage(data.error)
+            }
+
+        } catch {
+            setErrorMessage('Something went wrong!')
+        }
+    }
+
+    const minutes = String(Math.floor(secondsLeft / 60)).padStart(2, '0')
+    const seconds = String(secondsLeft % 60).padStart(2, '0')
 
     return (
         <CardWrapper
@@ -89,37 +156,52 @@ const LoginForm = () => {
                     <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col gap-[2rem]">
                         {showTwoFactor && (
                             (
-                                <FormField
-                                    control={form.control}
-                                    name="code"
-                                    render={({ field, fieldState }) => (
-                                        <FormItem>
-                                            <FormControl>
-                                                <InputOTP
-                                                    maxLength={6}
-                                                    pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                    onBlur={field.onBlur}
-                                                    disabled={isPending}
-                                                >
-                                                    <InputOTPGroup className="flex gap-2 justify-center w-full">
-                                                        {[...Array(6)].map((_, i) => (
-                                                            <InputOTPSlot
-                                                                key={i}
-                                                                index={i}
-                                                                className="w-[50px] h-[50px] rounded-[15px] focus:outline-none text-[20px]  border light-text"
-                                                            />
-                                                        ))}
-                                                    </InputOTPGroup>
-                                                </InputOTP>
-                                            </FormControl>
-                                            {fieldState.error && (
-                                                <FormError message={fieldState.error.message} />
-                                            )}
-                                        </FormItem>
-                                    )}
-                                />
+                                <>
+                                    <FormField
+                                        control={form.control}
+                                        name="code"
+                                        render={({ field, fieldState }) => (
+                                            <FormItem>
+                                                <FormControl>
+                                                    <InputOTP
+                                                        maxLength={6}
+                                                        pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+                                                        onBlur={field.onBlur}
+                                                        disabled={isPending}
+                                                    >
+                                                        <InputOTPGroup className="flex gap-2 justify-between w-full">
+                                                            {[...Array(6)].map((_, i) => (
+                                                                <InputOTPSlot
+                                                                    key={i}
+                                                                    index={i}
+                                                                    className="w-[54px] h-[54px] rounded-[15px] focus:outline-none text-[20px]  border light-text"
+                                                                />
+                                                            ))}
+                                                        </InputOTPGroup>
+                                                    </InputOTP>
+                                                </FormControl>
+                                                {fieldState.error && (
+                                                    <FormError message={fieldState.error.message} />
+                                                )}
+                                            </FormItem>
+                                        )}
+                                    />
+
+                                    <div className="w-full flex justify-end -mt-6 pr-2">
+                                        {secondsLeft > 0 ? (
+                                            <p className="text-[#fff2c7b3]/50 text-[1.5rem] font-thin">
+                                                Code expires in: {minutes}:{seconds}
+                                            </p>
+                                        ) : (
+                                            <p className="text-[#fff2c7b3]/50 text-[1.5rem] font-thin underline" onClick={handleResend}>
+                                                Resend code
+                                            </p>
+                                        )}
+                                    </div>
+                                </>
+
                             )
                         )}
 
@@ -198,7 +280,7 @@ const LoginForm = () => {
 
             </div>
 
-        </CardWrapper>
+        </CardWrapper >
     )
 }
 

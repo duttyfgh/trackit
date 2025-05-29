@@ -40,5 +40,5 @@ export const signUp = async (values: z.infer<typeof SignUpSchema>) => {
     
     //TODO: suggest user to set a profile photo immediately after creating account 
 
-    return { success: "Token sent! Check your email" }
+    return { success: "Check your email!" }
 }
