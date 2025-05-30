@@ -85,7 +85,7 @@ const LoginForm = () => {
         setErrorMessage('')
         setSuccessMessage('')
 
-        if(showTwoFactor && !values.code) {
+        if (showTwoFactor && !values.code) {
             setErrorMessage('Code is required!')
             return
         }
@@ -96,15 +96,14 @@ const LoginForm = () => {
                     setErrorMessage(data.error)
 
                     if (showTwoFactor) {
-                        
+
                         form.resetField('code')
                     } else {
-                        
+
                         form.reset()
                     }
                 }
                 if (data?.success) {
-                    form.reset()
                     setSuccessMessage(data?.success)
                 }
 
@@ -127,7 +126,7 @@ const LoginForm = () => {
 
             if (data?.twoFactorToken) {
                 form.resetField('code')
-                restartTimer()         
+                restartTimer()
             } else if (data?.error) {
                 setErrorMessage(data.error)
             }

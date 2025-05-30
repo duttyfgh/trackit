@@ -25,7 +25,6 @@ export const signUp = async (values: z.infer<typeof SignUpSchema>) => {
         return { error: "Email is taken!" }
     }
 
-    // if the "if" above is false we can continue and create user
     await db.user.create({
         data: {
             name,
@@ -40,5 +39,5 @@ export const signUp = async (values: z.infer<typeof SignUpSchema>) => {
     
     //TODO: suggest user to set a profile photo immediately after creating account 
 
-    return { success: "Check your email!" }
+    return { success: "Check your email!", isCodeMode: true }
 }
