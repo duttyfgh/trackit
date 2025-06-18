@@ -29,8 +29,9 @@ import CardWrapper from "./card-wripper"
 import TextInput from "./text-input"
 import GoogleAuthorizationButton from "./google-authorization-button"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp"
+import { newVerification } from "@/actions/new-verification"
 
-const COUNTDOWN_SECONDS = 5 * 60
+const COUNTDOWN_SECONDS = 5 * 60 // 5 min
 
 const LoginForm = () => {
     const searchParams = useSearchParams()
@@ -55,13 +56,17 @@ const LoginForm = () => {
         }
     })
 
+    // this timer is used for resending codes, user can try it every 5 minutes 
     const restartTimer = () => {
         if (timerRef.current !== null) {
             clearInterval(timerRef.current)
         }
+
         setSecondsLeft(COUNTDOWN_SECONDS)
 
         timerRef.current = window.setInterval(() => {
+
+            // every 1 second disincrease secs to get nice ux/ui
             setSecondsLeft((s) => {
                 if (s <= 1) {
                     if (timerRef.current !== null) clearInterval(timerRef.current)
@@ -76,12 +81,15 @@ const LoginForm = () => {
         if (showTwoFactor) {
             restartTimer()
         }
+
         return () => {
             if (timerRef.current !== null) clearInterval(timerRef.current)
         }
     }, [showTwoFactor])
 
     const handleSubmit = (values: z.infer<typeof LoginSchema>) => {
+
+        // cleans errors and successes every time we submit the form to improve ux
         setErrorMessage('')
         setSuccessMessage('')
 
@@ -90,18 +98,22 @@ const LoginForm = () => {
             return
         }
 
+        // if we have the code trying to verify it to it let us login 
+        if (values.code) {
+            newVerification(values.code)
+                .then((data) => {
+                    setSuccessMessage(data.success)
+                    setErrorMessage(data.error)
+                }).catch(() => {
+                    setSuccessMessage('')
+                    setErrorMessage("Something went wrong!")
+                })
+        }
+
         startTransition(() => {
             login(values).then((data) => {
                 if (data?.error) {
                     setErrorMessage(data.error)
-
-                    if (showTwoFactor) {
-
-                        form.resetField('code')
-                    } else {
-
-                        form.reset()
-                    }
                 }
                 if (data?.success) {
                     setSuccessMessage(data?.success)

@@ -32,9 +32,10 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
         const verificationToken = await generateVerificationToken(existingUser.email)
         await sendVerificationEmail(verificationToken.email, verificationToken.token)
 
-        return { success: "Check your email" }
+        return { success: "Check your email", twoFactorToken: true }
     }
 
+    // code
     if (existingUser.isTwoFactorEnabled && existingUser.email) {
         const twoFactorToken = await getTwoFactorTokenByEmail(existingUser.email)
 

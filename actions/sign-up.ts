@@ -22,7 +22,7 @@ export const signUp = async (values: z.infer<typeof SignUpSchema>) => {
     const existingUser = await getUserByEmail(email)
 
     if (existingUser) {
-        return { error: "Email is taken!" }
+        return { error: "Email is taken! Try to login" }
     }
 
     await db.user.create({
