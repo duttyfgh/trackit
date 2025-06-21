@@ -20,16 +20,17 @@ import {
 } from "@/components/ui/form"
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
 
-import ContextButton from "@/components/context-button"
+import ContextButton from "@/components/buttons/context-button"
 import Separator from "@/components/separator"
 import FormError from "@/components/form-error"
 import FormSuccess from "@/components/form-success"
 
-import CardWrapper from "./card-wripper"
+import CardWrapper from "../card-wripper"
 import TextInput from "./text-input"
 import GoogleAuthorizationButton from "./google-authorization-button"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp"
 import { newVerification } from "@/actions/new-verification"
+import Image from "next/image"
 
 const COUNTDOWN_SECONDS = 5 * 60 // 5 min
 
@@ -264,14 +265,18 @@ const LoginForm = () => {
                         <FormSuccess message={successMessage} />
 
                         <ContextButton
+                            mode="light"
                             type="submit"
-                            title={isPending ? '' : (showTwoFactor ? "Confirm" : "Log in")}
-                            img={isPending ? '/loader.svg' : ''}
-                            imageWidth={24}
-                            imageHeight={24}
-                            mode='light'
                             disabled={isPending}
-                        />
+                        >
+                            <span className="text-[1.6rem]">
+                                {isPending ? '' : (showTwoFactor ? "Confirm" : "Log in")}
+                            </span>
+
+                            {isPending && (
+                                <Image src='/loader.svg' width={24} height={24} alt="Loading..." className="animate-spin" />
+                            )}
+                        </ContextButton>
 
                     </form>
                 </Form>

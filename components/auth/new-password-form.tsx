@@ -19,13 +19,14 @@ import {
     FormItem,
 } from "@/components/ui/form"
 
-import ContextButton from "@/components/context-button"
+import ContextButton from "@/components/buttons/context-button"
 import Separator from "@/components/separator"
 import FormError from "@/components/form-error"
 import FormSuccess from "@/components/form-success"
 
-import CardWrapper from "./card-wripper"
+import CardWrapper from "../card-wripper"
 import TextInput from "./text-input"
+import Image from "next/image"
 
 const NewPasswordForm = () => {
     const searchParams = useSearchParams()
@@ -97,14 +98,18 @@ const NewPasswordForm = () => {
                         <FormSuccess message={successMessage} />
 
                         <ContextButton
+                            mode="light"
                             type="submit"
-                            title={isPending ? '' : "Reset password"}
-                            img={isPending ? '/loader.svg' : ''}
-                            imageWidth={24}
-                            imageHeight={24}
-                            mode='light'
                             disabled={isPending}
-                        />
+                        >
+                            <span className="text-[1.6rem]">
+                                {!isPending && "Reset password"}
+                            </span>
+
+                            {isPending && (
+                                <Image src='/loader.svg' width={24} height={24} alt="Loading..." className="animate-spin" />
+                            )}
+                        </ContextButton>
 
                     </form>
                 </Form>

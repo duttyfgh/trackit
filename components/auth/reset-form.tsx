@@ -18,13 +18,14 @@ import {
     FormItem,
 } from "@/components/ui/form"
 
-import ContextButton from "@/components/context-button"
+import ContextButton from "@/components/buttons/context-button"
 import Separator from "@/components/separator"
 import FormError from "@/components/form-error"
 import FormSuccess from "@/components/form-success"
 
-import CardWrapper from "./card-wripper"
+import CardWrapper from "../card-wripper"
 import TextInput from "./text-input"
+import Image from "next/image"
 
 const ResetForm = () => {
     const [errorMessage, setErrorMessage] = useState<string | undefined>('')
@@ -65,7 +66,7 @@ const ResetForm = () => {
             title='Enter your email to reset your password.'
             nextButtonLabel="Back to login"
             isBubbles={false}
-            isButton={false} 
+            isButton={false}
         >
 
             <div className="flex flex-col justify-around gap-[4rem] h-[400px] pt-[40px]">
@@ -94,23 +95,27 @@ const ResetForm = () => {
                         <FormSuccess message={successMessage} />
 
                         <ContextButton
+                            mode="light"
                             type="submit"
-                            title={isPending ? '' : "Send reset email"}
-                            img={isPending ? '/loader.svg' : ''}
-                            imageWidth={24}
-                            imageHeight={24}
-                            mode='light'
                             disabled={isPending}
-                        />
+                        >
+                            <span className="text-[1.6rem]">
+                                {!isPending && "Send reset email"}
+                            </span>
+
+                            {isPending && (
+                                <Image src='/loader.svg' width={24} height={24} alt="Loading..." className="animate-spin" />
+                            )}
+                        </ContextButton>
 
                     </form>
                 </Form>
 
                 <div className="flex flex-col gap-[2rem]">
                     <Separator title="or" />
-    
+
                     <div className="flex flex-col gap-5 w-full items-center">
-    
+
                         <div className="flex items-center gap-3 text-[1.6rem] light-text">
                             <p className="font-light">Don&#39;t have an account?</p>
                             <Link href='/auth/sign-up' className="font-semibold underline text-[#FFF2C7]/80">
@@ -118,7 +123,7 @@ const ResetForm = () => {
                             </Link>
                         </div>
                     </div>
-    
+
                 </div>
             </div>
 

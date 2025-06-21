@@ -22,7 +22,7 @@ import { signUp } from "@/actions/sign-up"
 import { login } from "@/actions/login"
 import { newVerification } from "@/actions/new-verification"
 
-import ContextButton from "@/components/context-button"
+import ContextButton from "@/components/buttons/context-button"
 import Separator from "@/components/separator"
 import FormError from "@/components/form-error"
 import FormSuccess from "@/components/form-success"
@@ -31,7 +31,8 @@ import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp"
 import GoogleAuthorizationButton from "./google-authorization-button"
 import TextInput from "./text-input"
-import CardWrapper from "./card-wripper"
+import CardWrapper from "../card-wripper"
+import Image from "next/image"
 
 const COUNTDOWN_SECONDS = 5 * 60
 
@@ -93,6 +94,7 @@ const SignUpForm = ({ name }: SignUpNameFormProps) => {
     }, [isCodeMode])
 
     const handleSubmit = (values: z.infer<typeof SignUpSchema>) => {
+
         if (isCodeMode) {
 
             if (!values.code) {
@@ -150,6 +152,7 @@ const SignUpForm = ({ name }: SignUpNameFormProps) => {
                     if (data?.isCodeMode) {
                         setIsCodeMode(true)
                     }
+
                 })
                     .catch(() => {
                         setSuccessMessage('')
@@ -193,6 +196,9 @@ const SignUpForm = ({ name }: SignUpNameFormProps) => {
             <div className="flex flex-col gap-[4rem]">
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col gap-[2rem]">
+
+
+
                         {isCodeMode && (
                             <>
                                 <FormField
@@ -285,13 +291,20 @@ const SignUpForm = ({ name }: SignUpNameFormProps) => {
 
                         <ContextButton
                             type="submit"
-                            title={isPending ? '' : "Continue"}
-                            img={isPending ? '/loader.svg' : ''}
-                            imageWidth={24}
-                            imageHeight={24}
                             mode='light'
                             disabled={isPending}
-                        />
+                        >
+                            {isPending && (
+                                <Image
+                                    src={isPending ? '/loader.svg' : ''}
+                                    width={24}
+                                    height={24}
+                                    alt='...'
+                                    className={isPending && 'animate-spin'}
+                                />
+                            )}
+                            <span className={`text-[1.6rem] ${isPending && 'text-[#FFF2C7]/80'}`}>{isPending ? '' : "Continue"}</span>
+                        </ContextButton>
 
                     </form>
                 </Form>

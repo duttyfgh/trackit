@@ -36,8 +36,6 @@ export const signUp = async (values: z.infer<typeof SignUpSchema>) => {
     const verificationToken = await generateVerificationToken(email)
 
     await sendVerificationEmail(verificationToken.email, verificationToken.token)
-    
-    //TODO: suggest user to set a profile photo immediately after creating account 
 
     return { success: "Check your email!", isCodeMode: true }
 }

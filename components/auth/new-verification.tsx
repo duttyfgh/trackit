@@ -7,10 +7,10 @@ import { useRouter } from "next/navigation"
 
 import { newVerification } from "@/actions/new-verification"
 
-import CardWrapper from "./card-wripper"
+import CardWrapper from "../card-wripper"
 import FormError from "@/components/form-error"
 import FormSuccess from "@/components/form-success"
-import ContextButton from "@/components/context-button"
+import ContextButton from "@/components/buttons/context-button"
 
 const NewVerificationForm = () => {
     const [error, setError] = useState<string | undefined>()
@@ -76,9 +76,12 @@ const NewVerificationForm = () => {
 
                 <ContextButton
                     mode="light"
-                    title="Back to login"
                     onClick={onClick}
-                />
+                >
+                    <span className="text-[1.6rem]">Back to login</span>
+                </ContextButton>
+
+
             </div>
         </CardWrapper>
     )

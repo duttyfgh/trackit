@@ -1,5 +1,5 @@
 import LoginButton from "@/components/auth/login-button"
-import ContextButton from "@/components/context-button"
+import ContextButton from "@/components/buttons/context-button"
 import Logo from "@/components/logo"
 import Image from "next/image"
 
@@ -18,7 +18,9 @@ const App = () => {
 
         <div className="px-[3.5rem] w-full">
           <LoginButton>
-            <ContextButton mode="dark" title="Get started" />
+            <ContextButton mode="dark">
+              <span className="text-[1.6rem]">Get started</span>
+            </ContextButton>
           </LoginButton>
         </div>
 

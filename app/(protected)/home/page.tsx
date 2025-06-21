@@ -1,21 +1,14 @@
-import { auth, signOut } from "@/auth"
+'use client'
 
-const HomePage = async () => {
-    const session = await auth()
+import Link from "next/link"
+
+
+const HomePage = () => {
+    const session = {}
 
     return (
         <div>
-            {JSON.stringify(session)}
-
-            <form action={async () => {
-                "use server"
-                await signOut({redirectTo: '/auth/login'})
-            }}>
-                <button type="submit">
-                    sign out
-                </button>
-            </form>
-
+            <Link href='/settings'>settings</Link>
         </div>
     )
 }

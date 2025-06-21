@@ -44,7 +44,7 @@ const TextInput = ({ label, type, error, disabled, ...rest }: TextInputProps) =>
                 type={inputType}
                 {...rest}
                 onBlur={focusOut}
-                className={`px-[2.1rem] py-[2.7rem] text-[1.6rem] border rounded-[1.2rem] border-[#FFF2C7]/15 bg-transparent text-[#FFF2C7]/80 z-10 outline-none transition-all ${error && 'border-[#dc3939]'} `}
+                className={`px-[2.1rem] py-[2.7rem] text-[1.6rem] border rounded-[1.2rem] border-[#FFF2C7]/10 bg-transparent text-[#FFF2C7]/80 z-10 outline-none transition-all ${error && 'border-[#dc3939]'} `}
                 disabled={disabled}
             />
             <span className={`px-1 text-[#FFF2C7]/50 text-[1.6rem] absolute ${isFocused ? '-top-5 z-20 dark-bg' : 'top-[1.6rem]'} left-[1.9rem] transition-all ${error && 'text-[#dc3939]'}`}>

@@ -1,7 +1,8 @@
 import { signIn } from "next-auth/react"
 
-import ContextButton from "../context-button"
+import ContextButton from "../buttons/context-button"
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes"
+import Image from "next/image"
 
 const GoogleAuthorizationButton = () => {
 
@@ -15,12 +16,11 @@ const GoogleAuthorizationButton = () => {
     return (
         <ContextButton
             onClick={onClick}
-            title="Google"
-            img="/google.svg"
-            imageWidth={24}
-            imageHeight={24}
             mode='dark'
-        />
+        >
+            <Image src="/google.svg" width={24} height={24} alt='...'/>
+            <span className="text-[1.6rem]">Google</span>
+        </ContextButton>
     )
 }
 

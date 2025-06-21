@@ -16,11 +16,12 @@ import {
     FormItem,
 } from "@/components/ui/form"
 
-import ContextButton from "@/components/context-button"
+import ContextButton from "@/components/buttons/context-button"
 import Separator from "@/components/separator"
 
-import CardWrapper from "./card-wripper"
+import CardWrapper from "../card-wripper"
 import TextInput from "./text-input"
+import GoogleAuthorizationButton from "./google-authorization-button"
 
 const SignUpNameForm = () => {
     const router = useRouter()
@@ -70,11 +71,10 @@ const SignUpNameForm = () => {
 
                         <ContextButton
                             type="submit"
-                            title="Continue"
-                            imageWidth={24}
-                            imageHeight={24}
                             mode='light'
-                        />
+                        >
+                            <span className="text-[1.6rem]">Continue</span>
+                        </ContextButton>
 
                     </form>
                 </Form>
@@ -82,14 +82,7 @@ const SignUpNameForm = () => {
                 <Separator title="or" />
 
                 <div className="flex flex-col gap-5 w-full items-center">
-                    <ContextButton
-                        onClick={() => {/* TODO: do a onClick */ }}
-                        title="Google"
-                        img="/google.svg"
-                        imageWidth={24}
-                        imageHeight={24}
-                        mode='dark'
-                    />
+                    <GoogleAuthorizationButton />
 
                     <div className="flex items-center gap-3 text-[1.6rem] text-[#FFF2C7]/80 ">
                         <p className="font-light">Already have an account?</p>
