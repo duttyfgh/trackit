@@ -39,7 +39,6 @@ export const {
 
                 if (!twoFactorConfirmation) return false
 
-                // TODO: delete 2FA for next sign in - author, my choice is to keep "has user registered already" in localStorage and check if there is no it then delete 2FA
 
                 await db.twoFactorConfirmation.delete({
                     where: { id: twoFactorConfirmation.id }
@@ -58,6 +57,10 @@ export const {
                 session.user.lastSeen = token.lastSeen as string
             }
 
+            if (token.name && session.user) {
+                session.user.name = token.name as string 
+            }
+
             return session
         },
         async jwt({ token }) {
@@ -72,6 +75,9 @@ export const {
             }
 
             token.lastSeen = existingUser.lastSeen
+
+            token.lastSeen = existingUser.lastSeen
+            token.name = existingUser.name
 
             return token
         }

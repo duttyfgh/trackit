@@ -235,11 +235,11 @@ const SignUpForm = ({ name }: SignUpNameFormProps) => {
 
                                 <div className="w-full flex justify-end -mt-6 pr-2">
                                     {secondsLeft > 0 ? (
-                                        <p className="text-[#fff2c7b3]/50 text-[1.5rem] font-thin">
+                                        <p className="text-[#FAF0CFb3]/50 text-[1.5rem] font-thin">
                                             Code expires in: {minutes}:{seconds}
                                         </p>
                                     ) : (
-                                        <p className="text-[#fff2c7b3]/50 text-[1.5rem] font-thin underline" onClick={handleResend}>
+                                        <p className="text-[#FAF0CFb3]/50 text-[1.5rem] font-thin underline" onClick={handleResend}>
                                             Resend code
                                         </p>
                                     )}
@@ -303,7 +303,7 @@ const SignUpForm = ({ name }: SignUpNameFormProps) => {
                                     className={isPending && 'animate-spin'}
                                 />
                             )}
-                            <span className={`text-[1.6rem] ${isPending && 'text-[#FFF2C7]/80'}`}>{isPending ? '' : "Continue"}</span>
+                            <span className={`text-[1.6rem] ${isPending && 'text-[#FAF0CF]/80'}`}>{isPending ? '' : "Continue"}</span>
                         </ContextButton>
 
                     </form>
@@ -316,7 +316,7 @@ const SignUpForm = ({ name }: SignUpNameFormProps) => {
 
                     <div className="flex items-center gap-3 text-[1.6rem] light-text">
                         <p className="font-light">Already have an account?</p>
-                        <Link href='/auth/login' className="font-semibold underline text-[#FFF2C7]/80">
+                        <Link href='/auth/login' className="font-semibold underline text-[#FAF0CF]/80">
                             Login in
                         </Link>
                     </div>

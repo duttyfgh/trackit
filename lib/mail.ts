@@ -119,13 +119,13 @@ a[x-apple-data-detectors],
           <td align="center" style="padding:0;Margin:0">
            <table align="center" cellspacing="0" cellpadding="0" bgcolor="#ffffff" class="es-header-body" role="none" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#FFFFFF;width:600px">
              <tr>
-              <td align="left" bgcolor="#fff2c7" style="padding:0;Margin:0;padding-top:20px;padding-right:20px;padding-left:20px;background-color:#fff2c7">
+              <td align="left" bgcolor="#FAF0CF" style="padding:0;Margin:0;padding-top:20px;padding-right:20px;padding-left:20px;background-color:#FAF0CF">
                <table align="right" cellspacing="0" cellpadding="0" class="es-right" role="none" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:right">
                  <tr>
                   <td align="left" style="padding:0;Margin:0;width:560px">
                    <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                      <tr>
-                      <td align="center" bgcolor="#fff2c7" style="padding:0;Margin:0"><h1 style="Margin:0;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:40px;font-style:normal;font-weight:normal;line-height:48px;color:#3c2a21"><strong>TrackIt</strong></h1></td>
+                      <td align="center" bgcolor="#FAF0CF" style="padding:0;Margin:0"><h1 style="Margin:0;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:40px;font-style:normal;font-weight:normal;line-height:48px;color:#3c2a21"><strong>TrackIt</strong></h1></td>
                      </tr>
                    </table></td>
                  </tr>
@@ -139,11 +139,11 @@ a[x-apple-data-detectors],
           <td align="center" style="padding:0;Margin:0">
            <table bgcolor="#ffffff" align="center" cellspacing="0" cellpadding="0" class="es-content-body" role="none" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#FFFFFF;width:600px">
              <tr>
-              <td align="left" bgcolor="#fff2c7" style="padding:0;Margin:0;padding-top:20px;padding-right:20px;padding-left:20px;background-color:#fff2c7">
+              <td align="left" bgcolor="#FAF0CF" style="padding:0;Margin:0;padding-top:20px;padding-right:20px;padding-left:20px;background-color:#FAF0CF">
                <table cellpadding="0" width="100%" cellspacing="0" role="none" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                  <tr>
                   <td valign="top" align="center" style="padding:0;Margin:0;width:560px">
-                   <table cellspacing="0" cellpadding="0" width="100%" bgcolor="#fff2c7" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#fff2c7" role="presentation">
+                   <table cellspacing="0" cellpadding="0" width="100%" bgcolor="#FAF0CF" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#FAF0CF" role="presentation">
                      <tr>
                       <td align="center" style="padding:0;Margin:0;font-size:0"><img src="https://ftxakqp.stripocdn.email/content/guids/CABINET_e8622f3e69372f23bfe9cf8c8705888c13a68049e5da9ec1dac7346bf81ab115/images/test_1_6lx.png" alt="" width="528" class="adapt-img" style="display:block;font-size:14px;border:0;outline:none;text-decoration:none"></td>
                      </tr>
@@ -159,7 +159,7 @@ a[x-apple-data-detectors],
           <td align="center" style="padding:0;Margin:0">
            <table cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center" class="es-footer-body" role="none" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#FFFFFF;width:600px">
              <tr>
-              <td align="left" bgcolor="#fff2c7" style="Margin:0;padding-top:20px;padding-right:20px;padding-left:20px;padding-bottom:20px;background-color:#fff2c7">
+              <td align="left" bgcolor="#FAF0CF" style="Margin:0;padding-top:20px;padding-right:20px;padding-left:20px;padding-bottom:20px;background-color:#FAF0CF">
                <table cellspacing="0" cellpadding="0" align="right" class="es-right" role="none" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:right">
                  <tr>
                   <td align="left" style="padding:0;Margin:0;width:560px">

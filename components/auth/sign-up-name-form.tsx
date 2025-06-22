@@ -84,7 +84,7 @@ const SignUpNameForm = () => {
                 <div className="flex flex-col gap-5 w-full items-center">
                     <GoogleAuthorizationButton />
 
-                    <div className="flex items-center gap-3 text-[1.6rem] text-[#FFF2C7]/80 ">
+                    <div className="flex items-center gap-3 text-[1.6rem] text-[#FAF0CF]/80 ">
                         <p className="font-light">Already have an account?</p>
                         <Link href='/auth/login' className="font-semibold underline">
                             login in

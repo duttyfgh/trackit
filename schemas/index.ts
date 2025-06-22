@@ -21,3 +21,8 @@ export const SignUpSchema = z.object({
     password: z.string().min(6, 'Min 6 characters'),
     code: z.optional(z.string()),
 })
+
+export const ChangeNameSchema = z.object({
+    name: z.string().min(3, 'Min 3 characters'),
+
+})

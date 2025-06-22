@@ -25,7 +25,7 @@ html {
 
 /* light */
 .light-bg {
-  background: #FFF2C7;
+  background: #FAF0CF;
 }
 
 .dark-bg {
@@ -33,17 +33,18 @@ html {
 }
 
 .light-text {
-  color: #fff2c7b3;
+  color: #FAF0CFb3;
 }
 
 .light-primary-text {
-  color: #FFF2C7;
+  color: #FAF0CF;
 }
 
 /* dark */
 .dark-text {
   color: #3C2A21
 }
+
 .dark-button-bg {
   background: #443026;
 }
@@ -63,6 +64,13 @@ html {
 }
 
 h1 {
+  font-family: "Baloo Da 2", serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.h1-styled {
   font-family: "Baloo Da 2", serif;
   font-optical-sizing: auto;
   font-weight: 900;
@@ -119,6 +127,7 @@ p {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -151,6 +160,7 @@ p {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }

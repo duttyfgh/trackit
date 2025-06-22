@@ -121,7 +121,7 @@ const NewPasswordForm = () => {
 
                         <div className="flex items-center gap-3 text-[1.6rem] light-text">
                             <p className="font-light">Don&#39;t have an account?</p>
-                            <Link href='/auth/sign-up' className="font-semibold underline text-[#FFF2C7]/80">
+                            <Link href='/auth/sign-up' className="font-semibold underline text-[#FAF0CF]/80">
                                 Sign up
                             </Link>
                         </div>

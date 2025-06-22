@@ -203,11 +203,11 @@ const LoginForm = () => {
 
                                     <div className="w-full flex justify-end -mt-6 pr-2">
                                         {secondsLeft > 0 ? (
-                                            <p className="text-[#fff2c7b3]/50 text-[1.5rem] font-thin">
+                                            <p className="text-[#FAF0CFb3]/50 text-[1.5rem] font-thin">
                                                 Code expires in: {minutes}:{seconds}
                                             </p>
                                         ) : (
-                                            <p className="text-[#fff2c7b3]/50 text-[1.5rem] font-thin underline" onClick={handleResend}>
+                                            <p className="text-[#FAF0CFb3]/50 text-[1.5rem] font-thin underline" onClick={handleResend}>
                                                 Resend code
                                             </p>
                                         )}
@@ -250,7 +250,7 @@ const LoginForm = () => {
                                                         error={form.formState.errors.password?.message}
                                                         disabled={isPending}
                                                         {...field} />
-                                                    <Link href='/auth/reset' className="text-[1.4rem] text-[#FFF2C7]/70 underline px-2">
+                                                    <Link href='/auth/reset' className="text-[1.4rem] text-[#FAF0CF]/70 underline px-2">
                                                         Forgot password?
                                                     </Link>
                                                 </div>
@@ -288,7 +288,7 @@ const LoginForm = () => {
 
                     <div className="flex items-center gap-3 text-[1.6rem] light-text">
                         <p className="font-light">Don&#39;t have an account?</p>
-                        <Link href='/auth/sign-up' className="font-semibold underline text-[#FFF2C7]/80">
+                        <Link href='/auth/sign-up' className="font-semibold underline text-[#FAF0CF]/80">
                             Sign up
                         </Link>
                     </div>
