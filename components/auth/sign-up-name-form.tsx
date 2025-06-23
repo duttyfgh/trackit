@@ -19,7 +19,7 @@ import {
 import ContextButton from "@/components/buttons/context-button"
 import Separator from "@/components/separator"
 
-import CardWrapper from "../card-wripper"
+import CardWrapper from "../card-wrapper"
 import TextInput from "./text-input"
 import GoogleAuthorizationButton from "./google-authorization-button"
 

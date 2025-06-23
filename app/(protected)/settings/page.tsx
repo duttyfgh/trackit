@@ -23,6 +23,7 @@ import { FormEvent, useState, useTransition } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import { useSession } from "next-auth/react"
+import PrimaryButtonWrapper from "@/components/buttons/primary-button-wrapper"
 
 const SettingsPage = () => {
     const [isChangeMode, setIsChangeMode] = useState<boolean>(false)
@@ -77,12 +78,16 @@ const SettingsPage = () => {
         })
     }
 
+    const onAboutUsRedirect = () => {
+        router.push('/about-us')
+    }
+
     return (
         <div className="flex flex-col justify-between h-full mt-auto">
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col gap-[4rem]">
                     <div className='w-full flex justify-center items-center flex-col mt-[2rem]flex-col gap-[1rem]'>
-                        <Image src={user?.image || '/placeholder-avatar.png'} width={120} height={120} alt="FN" className="rounded-full" />
+                        <Image src={user?.image || '/placeholder-avatar.png'} width={120} height={120} alt="FN" className="rounded-full mt-8" />
 
                         {isChangeMode
                             ? (
@@ -107,7 +112,7 @@ const SettingsPage = () => {
                             : (<h1 className="dark-text text-[2.4rem]">@<span className="text-[2.4rem]">{user?.name}</span></h1>)
                         }
 
-                        <div className="my-8 px-[3.5rem] flex justify-between w-full">
+                        <div className="mb-8 px-[3.5rem] flex justify-between w-full">
                             <Link href='/home' className="flex gap-[0.8rem] items-center">
                                 <Image src='/back.svg' width={23} height={23} alt='<-' />
                                 <span className="font-[410] text-[1.8rem]">back</span>
@@ -146,14 +151,33 @@ const SettingsPage = () => {
 
                 <div className="flex flex-col gap-[3.5rem]">
 
-                    <div className="flex flex-col">
+                    <div className="flex flex-col gap-6">
                         <PrimaryButton
-                            img="/emojis/settings-emoji.svg"
+                            img="/emojis/gear-emoji.png"
                             title="Edit home page"
                             symbolImg="/light-pen.svg"
                             symbolHeight={16}
                             symbolWight={16}
-                            onClick={() => { }} // TODO: implement edit home page functional
+                            onClick={() => { }} // TODO: implement edit home page functionality
+                        />
+
+                        <PrimaryButtonWrapper
+                            title="English"
+                            onClick={() => { }} // TODO: implement change language functionality
+                        >
+                            <ul className="list-disc">
+                                <li className=" text-[1.6rem] font-bold light-text">English</li>
+                                <li className=" text-[1.6rem] text-[#FAF0CFb3]/40">Ukrainian</li>
+                            </ul>
+                        </PrimaryButtonWrapper>
+
+                        <PrimaryButton
+                            img="/emojis/face-emoji.png"
+                            title="About us"
+                            symbolImg="/link-icon.svg"
+                            symbolHeight={16}
+                            symbolWight={16}
+                            onClick={onAboutUsRedirect}
                         />
 
                     </div>

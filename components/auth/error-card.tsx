@@ -4,7 +4,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 
 import Logo from "../logo"
-import CardWrapper from "../card-wripper"
+import CardWrapper from "../card-wrapper"
 import ContextButton from "../buttons/context-button"
 
 const ErrorCard = () => {

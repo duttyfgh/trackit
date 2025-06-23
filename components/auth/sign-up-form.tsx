@@ -31,7 +31,7 @@ import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp"
 import GoogleAuthorizationButton from "./google-authorization-button"
 import TextInput from "./text-input"
-import CardWrapper from "../card-wripper"
+import CardWrapper from "../card-wrapper"
 import Image from "next/image"
 
 const COUNTDOWN_SECONDS = 5 * 60

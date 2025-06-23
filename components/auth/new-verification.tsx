@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation"
 
 import { newVerification } from "@/actions/new-verification"
 
-import CardWrapper from "../card-wripper"
+import CardWrapper from "../card-wrapper"
 import FormError from "@/components/form-error"
 import FormSuccess from "@/components/form-success"
 import ContextButton from "@/components/buttons/context-button"

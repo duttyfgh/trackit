@@ -24,7 +24,7 @@ import Separator from "@/components/separator"
 import FormError from "@/components/form-error"
 import FormSuccess from "@/components/form-success"
 
-import CardWrapper from "../card-wripper"
+import CardWrapper from "../card-wrapper"
 import TextInput from "./text-input"
 import Image from "next/image"
 
