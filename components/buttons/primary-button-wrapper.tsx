@@ -35,7 +35,7 @@ const PrimaryButtonWrapper = ({ children, onClick, title }: PrimaryButtonWrapper
                 </div>
             </div>
 
-            <div className={`${isOpened && 'py-10'} px-[4.5rem] black-bg transition-all`} style={{height: (!isOpened ? 0 : 'auto' )}}>
+            <div className={`${isOpened && 'py-10'} px-[4.5rem] black-bg transition-all`} style={{ height: (!isOpened ? 0 : 'auto') }}>
                 {children}
             </div>
 
