@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import Bubble from '@/components/next-button/bubble'
+import Bubble from '@/components/buttons/next-button/bubble'
 
 interface NextButtonProps {
     nextButtonLabel: string,

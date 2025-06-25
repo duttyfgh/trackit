@@ -1,13 +1,22 @@
 'use client'
 
-import Logo from "@/components/logo"
-import Navbar from "@/components/navbar"
-import { useCurrentUser } from "@/hooks/use-current-user"
+import { useRouter } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
 
+import { useCurrentUser } from "@/hooks/use-current-user"
+
+import Card from "@/components/card"
+import Logo from "@/components/logo"
+import Navbar from "@/components/navbar"
+
 const HomePage = () => {
     const user = useCurrentUser()
+    const router = useRouter()
+
+    const chooseTrackerHandler = () => {
+        router.push('/choose-tracking')
+    }
 
     return (
         <div className="dark-bg min-h-screen">
@@ -26,15 +35,20 @@ const HomePage = () => {
                     </Link>
                 </div>
 
-                <div className="flex items-center gap-4 mb-6">
+                <div className="flex items-center gap-4 mb-6 h1-styled">
                     <Image src={user?.image || '/placeholder-avatar.png'} width={40} height={40} alt='FA' className="rounded-full" />
-                    <h1 className="dark-text text-[2.4rem] flex gap-2">Hi,<h1>{user?.name}</h1></h1>
+                    <h1 className="dark-text text-[2.4rem] flex gap-2">Hi,<span className="h1-styled text-[2.4rem]">{user?.name}</span></h1>
                 </div>
 
                 <Navbar />
             </div>
 
-            <div className="light-text">
+            <div className="flex flex-col py-[4rem] px-[3.5rem] gap-8">
+                <div className="flex gap-4">
+                    <Card label="Trackers" text='Choose tracker and start tracking!' seeAllHandler={chooseTrackerHandler} />
+                    <Card label="History" text='Check your tracks history here' seeAllHandler={() => { }} />
+                </div>
+
             </div>
         </div>
     )

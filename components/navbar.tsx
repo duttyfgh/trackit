@@ -3,7 +3,7 @@ import Image from "next/image"
 //TODO: take all the stuff from props
 const Navbar = () => {
     return (
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4 items-center font-medium">
             <div className="flex gap-3 items-start">
                 <Image src='/streak-icon.svg' width={14} height={18} alt='streak' />
                 <span>21 Day</span>

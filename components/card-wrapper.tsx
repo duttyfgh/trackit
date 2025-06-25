@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Header from "./auth/header"
 import Link from "next/link"
-import NextButton from "@/components/next-button/next-button"
+import NextButton from "@/components/buttons/next-button/next-button"
 
 interface CardWrapperProps {
     children: React.ReactNode,
