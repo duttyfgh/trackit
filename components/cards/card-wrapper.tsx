@@ -1,9 +1,8 @@
 'use client'
 
-import Image from "next/image"
-import Header from "./auth/header"
-import Link from "next/link"
+import Header from "@/components/auth/header"
 import NextButton from "@/components/buttons/next-button/next-button"
+import BackButton from "@/components/buttons/back-button"
 
 interface CardWrapperProps {
     children: React.ReactNode,
@@ -40,10 +39,7 @@ const CardWrapper = ({
         <div className="mt-auto">
 
             {isBackButton && (
-                <Link href={backButtonHref} className="flex gap-[0.8rem] items-center ml-[3.5rem] mb-[2.3rem]">
-                    <Image src='/back.svg' width={23} height={23} alt='<-' />
-                    <span className="font-[410] text-[1.8rem]">back</span>
-                </Link>
+                <BackButton href={backButtonHref} mode='dark' />
             )}
 
             <div className=" h-full flex flex-col dark-bg rounded-t-[2rem] items-stretch">

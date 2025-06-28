@@ -197,8 +197,6 @@ const SignUpForm = ({ name }: SignUpNameFormProps) => {
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col gap-[2rem]">
 
-
-
                         {isCodeMode && (
                             <>
                                 <FormField

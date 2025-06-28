@@ -6,7 +6,7 @@ import Link from "next/link"
 
 import { useCurrentUser } from "@/hooks/use-current-user"
 
-import Card from "@/components/card"
+import Card from "@/components/cards/dark-card"
 import Logo from "@/components/logo"
 import Navbar from "@/components/navbar"
 

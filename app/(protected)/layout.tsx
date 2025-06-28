@@ -2,7 +2,6 @@ import { Suspense } from 'react'
 import SuspenseLoader from '@/components/suspene-loader'
 import Logo from '@/components/logo'
 
-
 export default async function ProtectedLayout({
     children,
 }: {
