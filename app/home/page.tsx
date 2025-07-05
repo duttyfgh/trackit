@@ -26,7 +26,7 @@ const HomePage = () => {
             <div className="light-bg rounded-b-[2rem] px-[3.5rem] pb-[3rem] pt-4 shadow-xl">
                 <div className="flex justify-between mb-9">
                     <div className='flex gap-3'>
-                        <Image src='/emojis/rain-emoji.png' width={20} height={20} alt='🌧' />
+                        <Image src='/emojis/rain.png' width={20} height={20} alt='🌧' />
                         <span>Sun, 26 January 2025</span>
                     </div>
 

@@ -12,14 +12,14 @@ const Navbar = () => {
             <span className='dark-text text-[2rem]'>•</span>
 
             <div className="flex gap-2 items-center">
-                <Image src='/emojis/happy-emoji.png' width={18} height={18} alt='😇' />
+                <Image src='/emojis/happy.png' width={18} height={18} alt='😇' />
                 <span>Happy</span>
             </div>
 
             <span className='dark-text text-[2rem]'>•</span>
 
             <div className="flex gap-2 items-center">
-                <Image src='/emojis/calm-emoji.png' width={18} height={18} alt='😌' />
+                <Image src='/emojis/calm.png' width={18} height={18} alt='😌' />
                 <span>Complete calm</span>
             </div>
         </div>

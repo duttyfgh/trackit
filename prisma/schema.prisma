@@ -8,16 +8,18 @@ generator client {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime? @map("email_verified")
-  image         String?
-  password      String?
-  lastSeen      String?
-  accounts      Account[]
-  isTwoFactorEnabled Boolean @default(false)
+  id                    String                 @id @default(cuid())
+  name                  String?
+  email                 String?                @unique
+  emailVerified         DateTime?              @map("email_verified")
+  image                 String?
+  password              String?
+  lastSeen              String?
+  accounts              Account[]
+  isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
+
+  tracker Tracker?
 
   @@map("users")
 }
@@ -72,8 +74,41 @@ model TwoFactorToken {
 model TwoFactorConfirmation {
   id String @id @default(cuid())
 
-  userId String 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId])
+}
+
+model Tracker {
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  days Day[]
+
+  @@unique([userId])
+  @@map("trackers")
+}
+
+model Day {
+  id        String   @id @default(cuid())
+  tracker   Tracker  @relation(fields: [trackerId], references: [id], onDelete: Cascade)
+  trackerId String
+  date      DateTime @unique
+
+  moodLabel String // example: "Good"
+  moodValue Int // example: 4
+
+  anxietyLabel String // example: "High"
+  anxietyValue Int // example: 4
+
+  weather      String // "Cloudy", "Sunny", etc.
+  temperature  Float
+  overallLabel String // "Excellent", etc.
+  overallValue Int // 1–5
+
+  createdAt DateTime @default(now())
+
+  @@map("days")
 }

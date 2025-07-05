@@ -8,10 +8,9 @@ const trackersTypes = [
         lastSeen: '10:54',
         text: 'Things change every day have time to track it!',
         emojis: [
-            { src: '/emojis/house-emoji.png', alt: '🏡' },
-            { src: '/emojis/cloud-emoji.png', alt: '☁' },
-            { src: '/emojis/grinning-face-emoji.png', alt: '😀' },
-            { src: '/emojis/bed-emoji.png', alt: '🛌' },
+            { src: '/emojis/house.png', alt: '🏡' },
+            { src: '/emojis/grinning-face.png', alt: '😀' },
+            { src: '/emojis/bed.png', alt: '🛌' },
         ]
     }
 ]

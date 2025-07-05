@@ -18,7 +18,7 @@ export const authRoutes = [
     "/auth/sign-up",
     "/auth/error",
     "/auth/reset",
-    "/auth/new-password"
+    "/auth/new-password",
 ]
 
 export const signUpNestedRoutes = "/auth/sign-up"

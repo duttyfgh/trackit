@@ -153,7 +153,7 @@ const SettingsPage = () => {
 
                     <div className="flex flex-col gap-6">
                         <PrimaryButton
-                            img="/emojis/gear-emoji.png"
+                            img="/emojis/gear.png"
                             title="Edit home page"
                             symbolImg="/light-pen.svg"
                             symbolHeight={16}
@@ -172,7 +172,7 @@ const SettingsPage = () => {
                         </PrimaryButtonWrapper>
 
                         <PrimaryButton
-                            img="/emojis/face-emoji.png"
+                            img="/emojis/face.png"
                             title="About us"
                             symbolImg="/link-icon.svg"
                             symbolHeight={16}

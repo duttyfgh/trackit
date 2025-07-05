@@ -5,12 +5,14 @@ import Image from "next/image"
 
 interface PrimaryButtonWrapperProps {
     children: React.ReactNode
+
     title: string
+    img: string
 
     onClick: () => void
 }
 
-const PrimaryButtonWrapper = ({ children, onClick, title }: PrimaryButtonWrapperProps) => {
+const PrimaryButtonWrapper = ({ children, onClick, title, img }: PrimaryButtonWrapperProps) => {
     const [isOpened, setIsOpened] = useState<boolean>(false)
 
     const clickHandler = () => {
@@ -26,10 +28,10 @@ const PrimaryButtonWrapper = ({ children, onClick, title }: PrimaryButtonWrapper
                 >
                     <div className="flex items-center gap-[1.2rem]">
                         <div className="flex items-center justify-center rounded-full p-6 light-bg">
-                            <Image src="/emojis/usa-emoji.png" width={22} height={22} alt="..." />
+                            <Image src={img} width={22} height={22} alt="..." />
                         </div>
 
-                        <span className="capitalize light-primary-text text-[1.6rem] ">{title}</span>
+                        <span className="capitalize light-primary-text text-[1.6rem] font-light">{title}</span>
                     </div>
                     <Image src="/expander-icon.svg" width={10} height={10} alt=">" className={`${isOpened ? 'rotate-90' : ''} transition-all`} />
                 </div>

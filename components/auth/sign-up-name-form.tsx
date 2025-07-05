@@ -19,9 +19,9 @@ import {
 import ContextButton from "@/components/buttons/context-button"
 import Separator from "@/components/separator"
 
-import CardWrapper from "../card-wrapper"
 import TextInput from "./text-input"
 import GoogleAuthorizationButton from "./google-authorization-button"
+import CardWrapper from "@/components/cards/card-wrapper"
 
 const SignUpNameForm = () => {
     const router = useRouter()

@@ -10,7 +10,7 @@ export default async function ProtectedLayout({
 
     return (
         <Suspense fallback={<SuspenseLoader />}>
-            <div className="min-h-screen flex flex-col pt-[3.5rem] light-bg">
+            <div className="min-h-screen flex flex-col justify-between pt-[3.5rem] light-bg">
                 <Logo />
                 {children}
             </div>

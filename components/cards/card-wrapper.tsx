@@ -39,7 +39,9 @@ const CardWrapper = ({
         <div className="mt-auto">
 
             {isBackButton && (
-                <BackButton href={backButtonHref} mode='dark' />
+                <div className="pl-[3.5rem]">
+                    <BackButton href={backButtonHref} mode='dark' />
+                </div>
             )}
 
             <div className=" h-full flex flex-col dark-bg rounded-t-[2rem] items-stretch">
