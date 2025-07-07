@@ -8,7 +8,7 @@ const DayTracker = () => {
     const router = useRouter()
 
     const onDayCardHandler = () => {
-        router.push('/tracking/day/day-tracker/mood')
+        router.push('/tracking/day/day-tracker/overall-rate')
     }
 
     return (

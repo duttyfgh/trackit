@@ -55,7 +55,7 @@ const AnxietyTrackerPage = () => {
             <CardWrapper
                 label="Anxiety"
                 title="Rate your average anxiety during the day"
-                currentPage={2}
+                currentPage={3}
                 totalPages={5}
                 isBubbles
                 onHandler={nextHandler}

@@ -21,22 +21,22 @@ const moods = [
     },
     {
         id: 2,
-        emoji: '/emojis/arrogant.png',
-        title: 'Arrogant, Disgust, Bitchy',
-        color: '#E4FD91',
+        emoji: '/emojis/sad.png',
+        title: 'Sad, Upset, Hurt',
+        color: '#91CDFD',
         value: 4,
     },
     {
         id: 3,
-        emoji: '/emojis/sad.png',
-        title: 'Fatigued, Sadness, Hurt',
-        color: '#91CDFD',
+        emoji: '/emojis/without-mouth.png',
+        title: 'Tired, Empty, Apathetic',
+        color: '#E4FD91',
         value: 3,
     },
     {
         id: 4,
         emoji: '/emojis/anxiety.png',
-        title: 'Anxiety, Fear, Stressed',
+        title: 'Anxious, Fearful, Stressed',
         color: '#B991FD',
         value: 2,
     },
@@ -61,11 +61,11 @@ const MoodTrackerPage = () => {
             <CardWrapper
                 label="Mood"
                 title="Rate your average mood during the day"
-                currentPage={1}
+                currentPage={2}
                 totalPages={5}
                 isBubbles
                 onHandler={nextHandler}
-                backButtonHref="/tracking/day"
+                backButtonHref="/tracking/day/day-tracker/overall-rate"
 
             >
                 <div className="flex flex-col gap-6">

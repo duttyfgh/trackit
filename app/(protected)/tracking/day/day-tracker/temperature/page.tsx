@@ -47,7 +47,7 @@ const TemperatureTrackerPage = () => {
             <CardWrapper
                 label="Temperature"
                 title="What temperature was today?"
-                currentPage={3}
+                currentPage={4}
                 totalPages={5}
                 isBubbles
                 onHandler={nextHandler}

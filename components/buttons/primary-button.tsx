@@ -17,8 +17,8 @@ interface PrimaryButtonProps {
 
 const PrimaryButton = ({ img, title, symbolImg, symbolHeight, symbolWight, onClick, color }: PrimaryButtonProps) => {
     return (
-        <div
-            className="dark-button-bg px-[4.5rem] py-[1.5rem] border-[#FAF0CF]/10 border rounded-[2rem] flex justify-between items-center w-full shadow-md"
+        <button
+            className="dark-button-bg px-[4.5rem] py-[1.5rem] focus:bg-[#433026]  border-[#FAF0CF]/10 border rounded-[2rem] flex justify-between items-center w-full shadow-md transition-colors"
             onClick={onClick}
         >
             <div className="flex items-center gap-[1.2rem]">
@@ -35,7 +35,7 @@ const PrimaryButton = ({ img, title, symbolImg, symbolHeight, symbolWight, onCli
                 <Image src={symbolImg} width={symbolWight} height={symbolHeight} alt="..." />
             )}
 
-        </div>
+        </button>
     )
 }
 

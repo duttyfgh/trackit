@@ -1,7 +1,6 @@
 'use client'
 
 import { changeUserName, deleteAccount } from "@/actions/profile"
-import TextInput from "@/components/auth/text-input"
 import TextInputLine from "@/components/auth/text-input-line"
 import ContextButton from "@/components/buttons/context-button"
 import PrimaryButton from "@/components/buttons/primary-button"
@@ -162,6 +161,7 @@ const SettingsPage = () => {
                         />
 
                         <PrimaryButtonWrapper
+                            img="/emojis/usa.png"
                             title="English"
                             onClick={() => { }} // TODO: implement change language functionality
                         >

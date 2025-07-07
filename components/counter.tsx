@@ -28,7 +28,7 @@ const Counter = ({ minusHandlerHold, children, plusHandlerHold, stopAction, minu
                 <Image src='/left-counter-arrow.svg' height={21} width={26} alt='<' />
             </button>
 
-            <div className="dark-button-bg shadow-md flex items-center justify-center p-[4.5rem] rounded-full w-[13.5rem] h-[13.5rem]">
+            <div className="dark-button-bg border-[#FAF0CF]/10 border shadow-md flex items-center justify-center p-[4.5rem] rounded-full w-[13.5rem] h-[13.5rem]">
                 {children}
 
             </div>

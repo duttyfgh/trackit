@@ -4,5 +4,4 @@ const Bubble = ({ isEmpty }: { isEmpty: boolean }) => {
     )
 }
 
-
 export default Bubble
