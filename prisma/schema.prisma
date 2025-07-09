@@ -92,23 +92,18 @@ model Tracker {
 }
 
 model Day {
-  id        String   @id @default(cuid())
-  tracker   Tracker  @relation(fields: [trackerId], references: [id], onDelete: Cascade)
-  trackerId String
-  date      DateTime @unique
+  id          String   @id @default(cuid())
+  tracker     Tracker  @relation(fields: [trackerId], references: [id], onDelete: Cascade)
+  trackerId   String
+  date        DateTime @unique
 
-  moodLabel String // example: "Good"
-  moodValue Int // example: 4
+  moodValue     Int // example: 4
+  anxietyValue  Int // example: 3
+  weather       String // "Cloudy", "Sunny", etc.
+  temperature   Float
+  overallValue  Int // 1–5
 
-  anxietyLabel String // example: "High"
-  anxietyValue Int // example: 4
-
-  weather      String // "Cloudy", "Sunny", etc.
-  temperature  Float
-  overallLabel String // "Excellent", etc.
-  overallValue Int // 1–5
-
-  createdAt DateTime @default(now())
+  createdAt   DateTime @default(now())
 
   @@map("days")
 }

@@ -1,7 +1,8 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import Bubble from '@/components/buttons/next-button/bubble'
+import Image from 'next/image'
+import Link from 'next/link'
 
 interface NextButtonProps {
     nextButtonLabel: string,
@@ -24,8 +25,6 @@ const NextButton = ({
 
 }: NextButtonProps) => {
 
-    const router = useRouter()
-
     const bubbles = () => {
         const bubblesArray = []
 
@@ -36,11 +35,10 @@ const NextButton = ({
         }
         return bubblesArray
 
-    }   
+    }
 
     return (
         <div className="flex flex-col w-full mt-auto gap-[2.5rem]">
-
             {
                 isBubbles && (
                     <div className='flex gap-[0.5rem] w-full justify-center'>
@@ -48,13 +46,18 @@ const NextButton = ({
                     </div>
                 )
             }
-
-            <button
-                className="rounded-t-[3rem] light-bg w-full text-[2.4rem] dark-text px-4 py-7"
-                onClick={onHandler}
-            >
-                <h1>{nextButtonLabel}</h1>
-            </button>
+           <div className='flex items-end gap-2'>
+                <Link href='/tracking/day' className="rounded-t-[3rem] light-bg p-9 flex justify-center items-center">
+                    <Image src='/home.svg' width={25} height={20} alt="home" />
+                </Link>
+    
+                <button
+                    className="rounded-t-[3rem] light-bg w-full text-[2.4rem] dark-text px-4 py-7"
+                    onClick={onHandler}
+                >
+                    <h1>{nextButtonLabel}</h1>
+                </button>
+           </div>
         </div>
     )
 }

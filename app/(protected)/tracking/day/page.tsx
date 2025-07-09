@@ -1,42 +1,46 @@
 'use client'
 
-import BackButton from "@/components/buttons/back-button"
+import { useDayTrackerContext } from "@/contexts/day-tracker"
+
+import DayTracker from "@/components/day-tracker"
 import TrackerCard from "@/components/cards/tracker-card"
-import { useRouter } from "next/navigation"
+import BackButton from "@/components/buttons/back-button"
 
-const DayTracker = () => {
-    const router = useRouter()
-
-    const onDayCardHandler = () => {
-        router.push('/tracking/day/day-tracker/overall-rate')
+const anxietyList = [
+    {
+        level: 5,
+        img: '/emojis/calm.png'
+    },
+    {
+        level: 4,
+        img: '/emojis/without-mouth.png'
+    },
+    {
+        level: 3,
+        img: '/emojis/confused.png'
+    },
+    {
+        level: 2,
+        img: '/emojis/downcast.png'
+    },
+    {
+        level: 1,
+        img: '/emojis/yelling.png'
     }
+]
+
+const DayTrackerPage = () => {
+    const { dayTracks, setDayTracks } = useDayTrackerContext()
 
     return (
         <div className="p-12 pt-24 flex flex-col justify-start items-center w-full gap-9">
             <BackButton href="/choose-tracking" />
 
             <div className="flex justify-center w-full flex-col items-center gap-8">
-                <TrackerCard title="Day tracking" onClick={onDayCardHandler}>
-                    <ul className="light-text list-disc flex flex-col gap-2">
-                        <li className="text-[1.6rem]">
-                            average mood
-                        </li>
-                        <li className="text-[1.6rem]">
-                            average anxiety
-                        </li>
-                        <li className="text-[1.6rem]">
-                            weather
-                        </li>
-                        <li className="text-[1.6rem]">
-                            temperature
-                        </li>
-                        <li className="text-[1.6rem]">
-                            overall retting
-                        </li>
-                    </ul>
-                </TrackerCard>
 
-                <TrackerCard title="Sleep tracker" onClick={onDayCardHandler}>
+                <DayTracker dayTracks={dayTracks} />
+
+                <TrackerCard title="Sleep tracker" onClick={() => {}}>
                     <ul className="light-text list-disc flex flex-col gap-2">
                         <li className="text-[1.6rem]">
                             bedtime
@@ -61,4 +65,4 @@ const DayTracker = () => {
     )
 }
 
-export default DayTracker
+export default DayTrackerPage

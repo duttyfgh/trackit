@@ -20,6 +20,7 @@ interface CardWrapperProps {
     isBackButton?: boolean
 
     onHandler?: () => void
+    backButtonHandler?: () => void
 }
 
 const CardWrapper = ({
@@ -33,14 +34,15 @@ const CardWrapper = ({
     isBubbles = true,
     isButton = true,
     isBackButton = true,
-    onHandler
+    onHandler,
+    backButtonHandler
 }: CardWrapperProps) => {
     return (
         <div className="mt-auto">
 
             {isBackButton && (
                 <div className="pl-[3.5rem]">
-                    <BackButton href={backButtonHref} mode='dark' />
+                    <BackButton href={backButtonHref} mode='dark' onClick={backButtonHandler} />
                 </div>
             )}
 
@@ -54,15 +56,13 @@ const CardWrapper = ({
 
                 </div>
 
-
-                {isButton && <NextButton
-                    nextButtonLabel={nextButtonLabel || "Next"}
-                    currentPage={currentPage!}
-                    totalPages={totalPages!}
-                    isBubbles={isBubbles}
-                    onHandler={onHandler!}
-                />}
-
+                    {isButton && <NextButton
+                        nextButtonLabel={nextButtonLabel || "Next"}
+                        currentPage={currentPage!}
+                        totalPages={totalPages!}
+                        isBubbles={isBubbles}
+                        onHandler={onHandler!}
+                    />}
 
             </div>
         </div>

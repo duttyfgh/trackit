@@ -1,14 +1,22 @@
 'use client'
 
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+
+import { useDayTrackerContext } from "@/contexts/day-tracker"
+
 import CardWrapper from "@/components/cards/card-wrapper"
 import LightLine from "@/components/light-line"
 import { Rating, RatingButton } from "@/components/ui/shadcn-io/rating"
-import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
 
 type IRatings = { title: string, description: string, rating: number }
 
 const ratings: IRatings[] = [
+    {
+        title: 'Your day',
+        description: 'Rate your day based on how it felt overall, not just how productive it was',
+        rating: 0
+    },
     {
         title: 'Horrible',
         description: 'Everything was irritating, nothing went right, mood was low, a total burnout day',
@@ -37,9 +45,11 @@ const ratings: IRatings[] = [
 ]
 
 const OverallRatePage = () => {
-    const [currentRating, setCurrantRating] = useState<number>(3) // rating 3 by default
-    const [title, setTitle] = useState<string>(ratings[2].title) // rating 3 by default
-    const [description, setDescription] = useState<string>(ratings[2].description) // rating 3 by default
+    const { dayTracks, setDayTracks } = useDayTrackerContext()
+
+    const [currentRating, setCurrantRating] = useState<number>(dayTracks.overallRate) // rating 3 by default
+    const [title, setTitle] = useState<string>(ratings[dayTracks.overallRate].title) // rating 3 by default
+    const [description, setDescription] = useState<string>(ratings[dayTracks.overallRate ].description) // rating 3 by default
 
     const router = useRouter()
 
@@ -51,6 +61,7 @@ const OverallRatePage = () => {
         const { title, description } = ratings.find((r) => (r.rating === currentRating)) as IRatings
 
         setTitle(title)
+        setDayTracks({ ...dayTracks, overallRate: currentRating })
         setDescription(description)
 
     }, [currentRating])
@@ -65,6 +76,7 @@ const OverallRatePage = () => {
             onHandler={nextHandler}
             backButtonHref="/tracking/day"
         >
+
             <div className="flex flex-col items-center w-full gap-[5rem] py-[4em]">
                 <div className="flex gap-5 w-full justify-center">
                     <Rating defaultValue={currentRating} onValueChange={setCurrantRating}>
@@ -78,7 +90,7 @@ const OverallRatePage = () => {
 
                     <h1 className="text-[2.4rem] light-primary-text">{title}</h1>
                     <LightLine full />
-                    <p className="light-text leading-[1.4]">{description}</p>
+                    <p className="light-text leading-[1.4]" >{description}</p>
 
                 </div>
 

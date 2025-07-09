@@ -12,14 +12,17 @@ interface PrimaryButtonProps {
     title: string
     color?: string
 
+    focused: boolean
+
     onClick: () => void
 }
 
-const PrimaryButton = ({ img, title, symbolImg, symbolHeight, symbolWight, onClick, color }: PrimaryButtonProps) => {
+const PrimaryButton = ({ img, title, symbolImg, symbolHeight, symbolWight, onClick, color, focused = false }: PrimaryButtonProps) => {
     return (
         <button
-            className="dark-button-bg px-[4.5rem] py-[1.5rem] focus:bg-[#433026]  border-[#FAF0CF]/10 border rounded-[2rem] flex justify-between items-center w-full shadow-md transition-colors"
+            className="px-[4.5rem] py-[1.5rem] border-[#FAF0CF]/10 border rounded-[2rem] flex justify-between items-center w-full shadow-md transition-colors"
             onClick={onClick}
+            style={{backgroundColor: (focused && '#473328' || '#3e2c23' )}}
         >
             <div className="flex items-center gap-[1.2rem]">
                 <div

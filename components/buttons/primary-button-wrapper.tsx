@@ -9,10 +9,12 @@ interface PrimaryButtonWrapperProps {
     title: string
     img: string
 
+    focused: boolean
+
     onClick: () => void
 }
 
-const PrimaryButtonWrapper = ({ children, onClick, title, img }: PrimaryButtonWrapperProps) => {
+const PrimaryButtonWrapper = ({ children, onClick, title, img, focused = false }: PrimaryButtonWrapperProps) => {
     const [isOpened, setIsOpened] = useState<boolean>(false)
 
     const clickHandler = () => {
@@ -24,7 +26,8 @@ const PrimaryButtonWrapper = ({ children, onClick, title, img }: PrimaryButtonWr
         <div className="rounded-[2rem] overflow-hidden" onClick={clickHandler}>
             <div className="black-bg">
                 <button
-                    className="dark-button-bg px-[4.5rem] py-[1.5rem] border-[#FAF0CF]/10 border rounded-[2rem] flex justify-between items-center w-full shadow-md focus:bg-[#433026] transition-colors"
+                    className="dark-button-bg px-[4.5rem] py-[1.5rem] border-[#FAF0CF]/10 border rounded-[2rem] flex justify-between items-center w-full shadow-md transition-colors"
+                    style={{ backgroundColor: (focused && '#473328' || '#3e2c23') }}
                 >
                     <div className="flex items-center gap-[1.2rem]">
                         <div className="flex items-center justify-center rounded-full p-6 light-bg">

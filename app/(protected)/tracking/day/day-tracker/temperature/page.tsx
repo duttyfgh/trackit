@@ -4,14 +4,24 @@ import { useRouter } from "next/navigation"
 
 import CardWrapper from "@/components/cards/card-wrapper"
 import Counter from "@/components/counter"
+import { useDayTrackerContext } from "@/contexts/day-tracker"
 
 const TemperatureTrackerPage = () => {
-    const [temperature, setTemperature] = useState<number>(10)
+    const { dayTracks, setDayTracks } = useDayTrackerContext()
+
+    const [temperature, setTemperature] = useState<number>(15)
 
     const intervalRef = useRef<NodeJS.Timeout | number>(0)
     const router = useRouter()
 
+    // instead of changing it in context every time ui is changed, I change it only when user leaves the page
+    const saveTemperature = () => {
+        setDayTracks({...dayTracks, temperature})
+    }
+
     const nextHandler = () => {
+        saveTemperature()
+
         router.push('/tracking/day/day-tracker/weather')
     }
 
@@ -30,7 +40,6 @@ const TemperatureTrackerPage = () => {
         intervalRef.current = setInterval(() => {
             setTemperature((p) => (p - 1))
         }, 200)
-
     }
 
     // on click functions
@@ -51,8 +60,8 @@ const TemperatureTrackerPage = () => {
                 totalPages={5}
                 isBubbles
                 onHandler={nextHandler}
+                backButtonHandler={saveTemperature}
                 backButtonHref="/tracking/day/day-tracker/anxiety"
-
             >
                 <div className="w-full flex justify-center h-[30rem]">
                     <Counter
