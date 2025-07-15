@@ -40,12 +40,10 @@ const SettingsPage = () => {
     }
 
     const deleAccountHandler = () => {
+        signOut()
         startTransition(() => {
             deleteAccount(user?.email || '')
         })
-
-        router.push('/')
-
     }
 
     const openChangeMode = (e: FormEvent) => {

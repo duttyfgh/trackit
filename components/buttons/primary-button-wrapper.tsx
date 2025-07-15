@@ -9,7 +9,7 @@ interface PrimaryButtonWrapperProps {
     title: string
     img: string
 
-    focused: boolean
+    focused?: boolean
 
     onClick: () => void
 }

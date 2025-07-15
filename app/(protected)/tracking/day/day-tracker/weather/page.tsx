@@ -1,15 +1,13 @@
 'use client'
 
-import { useState } from "react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 
-import { useDayTrackerContext,  } from "@/contexts/day-tracker"
+import { useDayTrackerContext, } from "@/contexts/day-tracker"
 import { weathers, weatherType } from "@/data/day-tracker-data"
 
 import CardWrapper from "@/components/cards/card-wrapper"
 import LightLine from "@/components/light-line"
-
 
 const WeatherTrackerPage = () => {
     const { dayTracks, setDayTracks } = useDayTrackerContext()
@@ -45,7 +43,7 @@ const WeatherTrackerPage = () => {
                         <button
                             key={w.img}
                             className="p-8 dark-button-bg rounded-[20px] border-[#FAF0CF]/10 border shadow-md focus:bg-[#473328] transition-all"
-                            style={{backgroundColor: (dayTracks.weather === w.title && '#473328' || '#3e2c23' )}}
+                            style={{ backgroundColor: (dayTracks.weather === w.title && '#473328' || '#3e2c23') }}
                             onClick={() => { selectWeatherHandler(w.title) }}
                         >
                             <Image src={w.img} width={30} height={30} alt={w.title} />

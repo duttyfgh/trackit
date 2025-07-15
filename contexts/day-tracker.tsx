@@ -1,7 +1,10 @@
 'use client'
 
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
+
 import { weatherType } from '@/data/day-tracker-data'
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { useCurrentDayEntry } from '@/hooks/use-current-day-entry'
+import { useCurrentUser } from '@/hooks/use-current-user'
 
 export type DayTracksType = {
     overallRate: number
@@ -26,6 +29,23 @@ export const DayTrackerProvider = ({ children }: { children: ReactNode }) => {
         weather: '...',
         temperature: null,
     })
+
+    // get dayTracker data from db
+    const user = useCurrentUser()
+    const { data } = useCurrentDayEntry(user?.email || '')
+
+    useEffect(() => {
+        if (!data) return
+
+        // sync context with db 
+        setDayTracks({
+            overallRate: data.overallLevel,
+            moodLevel: data.moodLevel,
+            anxietyLevel: data.anxietyLevel,
+            weather: data.weather,
+            temperature: data.temperature,
+        })
+    }, [data])
 
     return (
         <DayTrackerContext.Provider value={{ dayTracks, setDayTracks }}>

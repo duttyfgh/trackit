@@ -4,8 +4,8 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 
 import Logo from "../logo"
-import CardWrapper from "../card-wrapper"
 import ContextButton from "../buttons/context-button"
+import CardWrapper from "../cards/card-wrapper"
 
 const ErrorCard = () => {
     const router = useRouter()

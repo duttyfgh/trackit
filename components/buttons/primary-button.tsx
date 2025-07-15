@@ -12,7 +12,7 @@ interface PrimaryButtonProps {
     title: string
     color?: string
 
-    focused: boolean
+    focused?: boolean
 
     onClick: () => void
 }

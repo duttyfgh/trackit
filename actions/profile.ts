@@ -1,19 +1,20 @@
 "use server"
 
 import { db } from "@/lib/db"
-import { getUserByEmail } from "@/data/user"
 import { signOut } from "@/auth"
+import { getUserByEmail } from "@/data/user"
 
 export const deleteAccount = async (email: string) => {
     const existingUser = await getUserByEmail(email)
 
     if (!existingUser) return
-
+    
+    await signOut()
+    
     await db.user.delete({
         where: { id: existingUser.id }
     })
 
-    await signOut()
 }
 
 export const changeUserName = async (name: string, email: string) => {
@@ -23,8 +24,7 @@ export const changeUserName = async (name: string, email: string) => {
         return
     }
 
-    
-    if(existingUser.name === name) {
+    if (existingUser.name === name) {
         return
     }
 

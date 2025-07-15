@@ -7,6 +7,22 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum WeatherType {
+  sunny
+  partly_cloudy
+  cloudy
+  lightning
+  rain
+  thunderstorm
+  rain_and_sun
+  snowy
+  windy
+  foggy
+  tornado
+  frosty
+  unknown
+}
+
 model User {
   id                    String                 @id @default(cuid())
   name                  String?
@@ -19,7 +35,7 @@ model User {
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
 
-  tracker Tracker?
+  dayTracker DayTracker?
 
   @@map("users")
 }
@@ -80,30 +96,27 @@ model TwoFactorConfirmation {
   @@unique([userId])
 }
 
-model Tracker {
+model DayTracker {
   id     String @id @default(cuid())
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String
+  userId String @unique
 
-  days Day[]
+  days DayEntry[]
 
-  @@unique([userId])
-  @@map("trackers")
+  @@map("day_trackers")
 }
 
-model Day {
-  id          String   @id @default(cuid())
-  tracker     Tracker  @relation(fields: [trackerId], references: [id], onDelete: Cascade)
-  trackerId   String
-  date        DateTime @unique
+model DayEntry {
+  id           String      @id @default(cuid())
+  dayTracker   DayTracker  @relation(fields: [dayTrackerId], references: [id], onDelete: Cascade)
+  dayTrackerId String
+  date         DateTime
+  moodLevel    Int
+  anxietyLevel Int
+  weather      WeatherType
+  temperature  Float
+  overallLevel Int
+  createdAt    DateTime    @default(now())
 
-  moodValue     Int // example: 4
-  anxietyValue  Int // example: 3
-  weather       String // "Cloudy", "Sunny", etc.
-  temperature   Float
-  overallValue  Int // 1–5
-
-  createdAt   DateTime @default(now())
-
-  @@map("days")
+  @@unique([dayTrackerId, date])
 }

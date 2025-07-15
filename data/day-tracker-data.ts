@@ -1,18 +1,17 @@
 export type weatherType =
     | 'sunny'
-    | 'party cloudy'
+    | 'partly_cloudy'
     | 'cloudy'
     | 'lightning'
     | 'rain'
     | 'thunderstorm'
-    | 'rain and sun'
+    | 'rain_and_sun'
     | 'snowy'
     | 'windy'
-    | 'fogy'
+    | 'foggy'
     | 'tornado'
     | 'frosty'
     | '...'
-
 
 export const moods = [
     {
@@ -98,7 +97,7 @@ export const weathers: { img: string, title: weatherType }[] = [
     },
     {
         img: '/emojis/party-cloudy.png',
-        title: 'party cloudy'
+        title: 'partly_cloudy'
     },
     {
         img: '/emojis/cloud.png',
@@ -118,7 +117,7 @@ export const weathers: { img: string, title: weatherType }[] = [
     },
     {
         img: '/emojis/rain-and-sun.png',
-        title: 'rain and sun'
+        title: 'rain_and_sun'
     },
     {
         img: '/emojis/snow.png',
@@ -130,7 +129,7 @@ export const weathers: { img: string, title: weatherType }[] = [
     },
     {
         img: '/emojis/fog.png',
-        title: 'fogy'
+        title: 'foggy'
     },
     {
         img: '/emojis/tornado.png',

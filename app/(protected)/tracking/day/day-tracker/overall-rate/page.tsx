@@ -8,6 +8,9 @@ import { useDayTrackerContext } from "@/contexts/day-tracker"
 import CardWrapper from "@/components/cards/card-wrapper"
 import LightLine from "@/components/light-line"
 import { Rating, RatingButton } from "@/components/ui/shadcn-io/rating"
+import { setOverallRate } from "@/actions/overall-rate"
+import { useCurrentDayEntry } from "@/hooks/use-current-day-entry"
+import { useCurrentUser } from "@/hooks/use-current-user"
 
 type IRatings = { title: string, description: string, rating: number }
 
@@ -45,15 +48,19 @@ const ratings: IRatings[] = [
 ]
 
 const OverallRatePage = () => {
+
+    const user = useCurrentUser()
+
     const { dayTracks, setDayTracks } = useDayTrackerContext()
 
-    const [currentRating, setCurrantRating] = useState<number>(dayTracks.overallRate) // rating 3 by default
+    const [currentRating, setCurrentRating] = useState<number>(dayTracks.overallRate) // rating 3 by default
     const [title, setTitle] = useState<string>(ratings[dayTracks.overallRate].title) // rating 3 by default
-    const [description, setDescription] = useState<string>(ratings[dayTracks.overallRate ].description) // rating 3 by default
+    const [description, setDescription] = useState<string>(ratings[dayTracks.overallRate].description) // rating 3 by default
 
     const router = useRouter()
 
-    const nextHandler = () => {
+    const nextHandler = async () => {
+        await setOverallRate(currentRating, user?.email || '')
         router.push('/tracking/day/day-tracker/mood')
     }
 
@@ -65,6 +72,7 @@ const OverallRatePage = () => {
         setDescription(description)
 
     }, [currentRating])
+
 
     return (
         <CardWrapper
@@ -79,7 +87,7 @@ const OverallRatePage = () => {
 
             <div className="flex flex-col items-center w-full gap-[5rem] py-[4em]">
                 <div className="flex gap-5 w-full justify-center">
-                    <Rating defaultValue={currentRating} onValueChange={setCurrantRating}>
+                    <Rating value={currentRating} defaultValue={currentRating} onValueChange={setCurrentRating}>
                         {Array.from({ length: 5 }).map((_, index) => (
                             <RatingButton key={index} className="text-[#F9D22C]" size={50} />
                         ))}
